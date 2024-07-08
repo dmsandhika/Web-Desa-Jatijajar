@@ -56,7 +56,9 @@ class ArticleController extends Controller
         $article->slug = $slug;
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
+            $photo = $request->file('photo');
+            $photoPath = 'artikel/' . $photo->getClientOriginalName();
+            $photo->move(public_path('artikel'), $photo->getClientOriginalName());
             $article->photo = $photoPath;
         }
 

@@ -13,6 +13,13 @@
       |
       <a href="" class="hover:underline group-hover:text-white">{{ $article->category->name }}</a> | {{ $article->created_at->diffForHumans() }}
     </div>
+  
+    @if(!empty($article->photo))
+    <div class="flex justify-center my-6">
+      <img src="{{ asset($article->photo) }}" alt="{{ $article->title }}" class="rounded-lg shadow-md">
+    </div>
+  @endif
+    
     <p class="my-6 font-light group-hover:text-white">{!! nl2br(e($article->content)) !!}</p>
   </div>
 
