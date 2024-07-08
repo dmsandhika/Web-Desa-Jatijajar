@@ -15,17 +15,14 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::where('status', 'diterima')->orderBy('created_at', 'desc')->get();
-        return view('article', ['title' => 'Galeri Kegiatan', 'articles' => $articles]);
+        return view('articles.article', ['title' => 'Galeri Kegiatan', 'articles' => $articles]);
     }
 
     public function latestArticles()
-{
-    $articles = Article::orderBy('created_at', 'desc')->take(3)->get();
-    return view('home', ['title' => '3 Artikel Terbaru', 'articles' => $articles]);
-}
-    /**
-     * Show the form for creating a new resource.
-     */
+    {
+        $articles = Article::orderBy('created_at', 'desc')->take(3)->get();
+        return view('home', ['title' => '3 Artikel Terbaru', 'articles' => $articles]);
+    }
     public function create()
     {
         $categories = Category::all();
@@ -33,9 +30,6 @@ class ArticleController extends Controller
         return view('articles.create', compact('categories', 'title'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
