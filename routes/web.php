@@ -21,5 +21,5 @@ Route::get('/article/{article:slug}', function(Article $article){
 Route::get('/articles/create', [ ArticleController::class, 'create']);
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/surat', function () {
-    return view('surat.index', ['title'=>'Pengajuan Surat', 'letter'=>Letter::all()]);
+    return view('surat.index', ['title'=>'Pengajuan Surat']);
 });
