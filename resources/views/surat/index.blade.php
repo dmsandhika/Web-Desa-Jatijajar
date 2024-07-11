@@ -5,27 +5,27 @@
    $data = [
     [
         'title' => 'Keterangan Belum Nikah',
-        'href' => '#',
+        'href' => '/surat/form_belumnikah',
     ],
     [
         'title' => 'Keterangan Domisili',
-        'href' => '#',
+        'href' => '/surat/form_domisili',
     ],
     [
         'title' => 'Keterangan Lahir',
-        'href' => '#',
+        'href' => '/surat/form_lahir',
     ],
     [
         'title' => 'Keterangan Meninggal',
-        'href' => '#',
+        'href' => '/surat/form_meninggal',
     ],
     [
         'title' => 'Keterangan Tidak Mampu',
-        'href' => '#',
+        'href' => '/surat/form_tidakmampu',
     ],
     [
         'title' => 'Keterangan Usaha',
-        'href' => '#',
+        'href' => '/surat/form_usaha',
     ],
     [
         'title' => 'Keterangan Kendaraan',

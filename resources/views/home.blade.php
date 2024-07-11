@@ -123,7 +123,7 @@
             <p class="font-bold text-white">Galeri Kegiatan</p>
           </div>
         </a>
-        <a href="#" class="hover:-translate-y-2 group bg-neutral-50 duration-500 w-44 h-32 flex text-neutral-600 flex-col justify-center items-center relative rounded-xl overflow-hidden shadow-md">
+        <a href="/surat" class="hover:-translate-y-2 group bg-neutral-50 duration-500 w-44 h-32 flex text-neutral-600 flex-col justify-center items-center relative rounded-xl overflow-hidden shadow-md">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="absolute blur z-10 fill-yellow-300 duration-500 group-hover:blur-none group-hover:scale-105">
                 <rect x="25" y="50" width="150" height="100" />
             </svg>
@@ -132,9 +132,6 @@
                 <p class="font-bold text-white">Layanan Desa</p>
             </div>
         </a>
-        
-   
-      
     </div>
 
     <div>

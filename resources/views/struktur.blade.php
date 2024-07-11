@@ -13,8 +13,7 @@
     </h2>
     <div id="accordion-color-body-1" class="hidden" aria-labelledby="accordion-color-heading-1">
       <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-        <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-        <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-yellow-600 dark:text-yellow-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+      <img src="img/struktur/struktur.jpg" alt="">  
       </div>
     </div>
     @foreach ( $struktur as $str )
