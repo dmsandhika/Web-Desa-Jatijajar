@@ -41,3 +41,15 @@ Route::get('/surat/form_tidakmampu', function () {
 Route::get('/surat/form_usaha', function () {
     return view('surat.form.usaha', ['title'=>'Form Surat Keterangan Usaha']);
 });
+Route::get('/surat/form_keramaian', function () {
+    return view('surat.form.keramaian', ['title'=>'Form Surat Izin Keramaian']);
+});
+Route::get('/surat/form_ektp', function () {
+    return view('surat.form.ektp', ['title'=>'Form Surat Pengantar E-Ktp']);
+});
+Route::get('/surat/form_skck', function () {
+    return view('surat.form.skck', ['title'=>'Form Surat Pengantar SKCK']);
+});
+Route::get('/surat/form_kehilangan', function () {
+    return view('surat.form.kehilangan', ['title'=>'Form Surat Keterangan Kehilangan']);
+});

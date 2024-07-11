@@ -28,32 +28,20 @@
         'href' => '/surat/form_usaha',
     ],
     [
-        'title' => 'Keterangan Kendaraan',
-        'href' => '#',
-    ],
-    [
         'title' => 'Pengantar Izin Keramaian',
-        'href' => '#',
+        'href' => '/surat/form_keramaian',
     ],
     [
         'title' => 'Pengantar E-Ktp',
-        'href' => '#',
+        'href' => '/surat/form_ektp',
     ],
     [
         'title' => 'Pengantar SKCK',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Keterangan Jual Beli',
-        'href' => '#',
+        'href' => '/surat/form_skck',
     ],
     [
         'title' => 'Keterangan Kehilangan',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Permohonan Bantuan Penunggu Pasien',
-        'href' => '#',
+        'href' => '/surat/form_kehilangan',
     ],
     [
         'title' => 'Keterangan Penghasilan',
