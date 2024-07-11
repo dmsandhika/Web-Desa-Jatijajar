@@ -53,3 +53,9 @@ Route::get('/surat/form_skck', function () {
 Route::get('/surat/form_kehilangan', function () {
     return view('surat.form.kehilangan', ['title'=>'Form Surat Keterangan Kehilangan']);
 });
+Route::get('/surat/form_penghasilan', function () {
+    return view('surat.form.penghasilan', ['title'=>'Form Surat Keterangan Penghasilan']);
+});
+Route::get('/surat/form_rekomendasi', function () {
+    return view('surat.form.rekomendasi', ['title'=>'Form Surat Rekomendasi']);
+});

@@ -45,11 +45,11 @@
     ],
     [
         'title' => 'Keterangan Penghasilan',
-        'href' => '#',
+        'href' => '/surat/form_penghasilan',
     ],
     [
         'title' => 'Surat Rekomendasi',
-        'href' => '#',
+        'href' => '/surat/form_rekomendasi',
     ],
     [
         'title' => 'Keterangan Penghasilan Orang Tua',
