@@ -71,3 +71,6 @@ Route::get('/surat/form_domisili_lembaga', function () {
 Route::get('/surat/form_beda_identitas', function () {
     return view('surat.form.beda_identitas', ['title'=>'Form Surat Keterangan Beda Identitas']);
 });
+Route::get('/admin', function () {
+    return view('admin.index');
+});
