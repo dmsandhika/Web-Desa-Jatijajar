@@ -59,3 +59,15 @@ Route::get('/surat/form_penghasilan', function () {
 Route::get('/surat/form_rekomendasi', function () {
     return view('surat.form.rekomendasi', ['title'=>'Form Surat Rekomendasi']);
 });
+Route::get('/surat/form_hasil_ortu', function () {
+    return view('surat.form.hasilortu', ['title'=>'Form Surat Keterangan Penghasilan Orang Tua']);
+});
+Route::get('/surat/form_kuasa', function () {
+    return view('surat.form.kuasa', ['title'=>'Form Surat Permohonan Kuasa']);
+});
+Route::get('/surat/form_domisili_lembaga', function () {
+    return view('surat.form.domisili_lembaga', ['title'=>'Form Surat Keterangan Domisili Lembaga']);
+});
+Route::get('/surat/form_beda_identitas', function () {
+    return view('surat.form.beda_identitas', ['title'=>'Form Surat Keterangan Beda Identitas']);
+});

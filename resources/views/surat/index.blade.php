@@ -53,39 +53,19 @@
     ],
     [
         'title' => 'Keterangan Penghasilan Orang Tua',
-        'href' => '#',
+        'href' => '/surat/form_hasil_ortu',
     ],
     [
         'title' => 'Permohonan Kuasa',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Perjanjian Kesepakatan',
-        'href' => '#',
+        'href' => '/surat/form_kuasa',
     ],
     [
         'title' => 'Keterangan Domisili Lembaga',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Keterangan Pindah Domisili',
-        'href' => '#',
+        'href' => '/surat/form_domisili_lembaga',
     ],
     [
         'title' => 'Ket. Beda Identitas',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Pengantar Catin',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Keterangan Perkawinan',
-        'href' => '#',
-    ],
-    [
-        'title' => 'Pernyataan Izin Keluarga',
-        'href' => '#',
+        'href' => '/surat/form_beda_identitas',
     ],
     [
         'title' => 'Keterangan Lainnya',
