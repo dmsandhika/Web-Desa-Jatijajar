@@ -78,7 +78,7 @@ Route::get('/admin/surat', function () {
     return view('admin.surat', ['title'=>'Kelola Surat']);
 });
 Route::get('/admin/artikel', function () {
-    return view('admin.artikel', ['title'=>'Artikel Kegiatan Desa']);
+    return view('admin.artikel', ['title'=>'Artikel Kegiatan Desa', 'blog'=>Article::all()]);
 });
 Route::get('/admin/struktur', function () {
     return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa']);
