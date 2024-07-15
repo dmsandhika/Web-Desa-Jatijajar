@@ -12,8 +12,8 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <x-nav-link href="/profil" :active="request()-> is('profil')">Profil</x-nav-link>
-              <x-nav-link href="/struktur" :active="request()-> is('struktur')">Struktur Organisasi</x-nav-link>
-              <x-nav-link href="/article" :active="request()-> is('article')">Galeri Kegiatan</x-nav-link>
+              <x-nav-link href="/struktur" :active="request()-> is('struktur')">Struktur</x-nav-link>
+              <x-nav-link href="/article" :active="request()-> is('article')">Artikel</x-nav-link>
               <x-nav-link href="/surat" :active="request()-> is('surat')">Layanan</x-nav-link>
               
             </div>
@@ -65,8 +65,8 @@
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <x-nav-link-mob href="/profil" :active="request()-> is('profil')">Profil</x-nav-link-mob>
-        <x-nav-link-mob href="/struktur" :active="request()-> is('struktur')">Struktur Organisasi</x-nav-link-mob>
-        <x-nav-link-mob href="/article" :active="request()-> is('article')">Blog</x-nav-link-mob>
+        <x-nav-link-mob href="/struktur" :active="request()-> is('struktur')">Struktur</x-nav-link-mob>
+        <x-nav-link-mob href="/article" :active="request()-> is('article')">Artikel</x-nav-link-mob>
         <x-nav-link-mob href="/surat" :active="request()-> is('surat')">Layanan</x-nav-link-mob>
       </div>
       <div class="border-t border-yellow-700 pb-3 pt-4">

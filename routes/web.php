@@ -72,5 +72,14 @@ Route::get('/surat/form_beda_identitas', function () {
     return view('surat.form.beda_identitas', ['title'=>'Form Surat Keterangan Beda Identitas']);
 });
 Route::get('/admin', function () {
-    return view('admin.index');
+    return view('admin.index', ['title'=>'Dashboard']);
+});
+Route::get('/admin/surat', function () {
+    return view('admin.surat', ['title'=>'Kelola Surat']);
+});
+Route::get('/admin/artikel', function () {
+    return view('admin.artikel', ['title'=>'Artikel Kegiatan Desa']);
+});
+Route::get('/admin/struktur', function () {
+    return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa']);
 });
