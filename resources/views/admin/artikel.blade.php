@@ -9,6 +9,9 @@
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
               <th scope="col" class="px-6 py-3">
+                  No.
+              </th>
+              <th scope="col" class="px-6 py-3">
                   Judul
               </th>
               <th scope="col" class="px-6 py-3">
@@ -29,12 +32,18 @@
           </tr>
       </thead>
       <tbody>
+        @php
+          $no = 1;
+        @endphp
         @foreach ( $blog as $b )
           
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{ $b['title'] }}
+            {{ $no++ }}
           </th>
+          <td class="px-6 py-4">
+            {{ $b['title']  }}
+          </td>
           <td class="px-6 py-4">
             {{ $b['created_at'] }}
           </td>
@@ -63,9 +72,16 @@
           </span>
       </td>
       <td class="px-6 py-4">
-        <a href="#" class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">
+        <a href="{{ route('artikel.edit', $b->id) }}" class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">
             <i class="fas fa-pencil-alt mr-2"></i> Edit
         </a>
+        <form action="{{ route('artikel.destroy', $b->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="inline-flex items-center mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">
+              <i class="fas fa-trash-alt mr-2"></i> Hapus
+          </button>
+      </form>
     </td>
     
     

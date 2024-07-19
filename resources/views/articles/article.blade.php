@@ -2,8 +2,8 @@
   <x-slot:title>{{ $title }}</x-slot>
 
   <div class="flex justify-between items-center w-full mb-8">
-    <form class="form relative w-1/4">
-      <button class="absolute left-2 -translate-y-1/2 top-1/2 p-1">
+    <form class="form relative w-1/4" action="{{ url('article') }}" method="get">
+      <div class="absolute left-2 -translate-y-1/2 top-1/2 p-1">
         <svg
           width="17"
           height="16"
@@ -21,10 +21,11 @@
             stroke-linejoin="round"
           ></path>
         </svg>
-      </button>
+      </div>
       <input
         class="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md w-full"
         placeholder="Cari..."
+        name="search"
         required=""
         type="text"
       />
@@ -54,7 +55,7 @@
   </div>
   
 
-  
+  @if ($hasArticles)
 @foreach ($articles as $blog)
   
 
@@ -95,6 +96,9 @@
   </a>
 </div>
 @endforeach
+@else
+<p>Data tidak ada</p>
+@endif
 
 
 

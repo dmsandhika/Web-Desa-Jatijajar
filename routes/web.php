@@ -2,9 +2,11 @@
 
 use App\Models\Letter;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Struktur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', [ArticleController::class, 'latestArticles']);
 Route::get('/profil', function () {
@@ -77,9 +79,24 @@ Route::get('/admin', function () {
 Route::get('/admin/surat', function () {
     return view('admin.surat', ['title'=>'Kelola Surat']);
 });
-Route::get('/admin/artikel', function () {
-    return view('admin.artikel', ['title'=>'Artikel Kegiatan Desa', 'blog'=>Article::all()]);
-});
+
+Route::get('admin/artikel/daftar', function () {
+    return view('admin.artikel', [
+        'title' => 'Artikel Kegiatan Desa',
+        'blog' => Article::all()
+    ]);
+})->name('article.list');
+
+Route::get('/admin/artikel/kategori', function () {
+    return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
+})->name('kategori.list');
+Route::post('/admin/artikel/kategori', [CategoryController::class, 'store'])->name('kategori.store');
+Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
+
 Route::get('/admin/struktur', function () {
-    return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa']);
+    return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa', 'strk'=>Struktur::all()]);
 });
+Route::get('/admin/artikel/{id}/edit', [ArticleController::class, 'edit'])->name('artikel.edit');
+Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
+Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');
+Route::get('/articles/count', [ArticleController::class, 'countArticles']);

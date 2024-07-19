@@ -20,7 +20,7 @@ public function up()
         $table->string('author');
         $table->text('content');
         $table->string('photo')->nullable();
-        $table->enum('status', ['diajukan', 'diterima', 'ditolak'])->default('diterima');
+        $table->enum('status', ['diajukan', 'diterima', 'ditolak'])->default('diajukan');
         $table->timestamps();
     });
 }
