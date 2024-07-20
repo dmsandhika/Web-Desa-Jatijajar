@@ -25,7 +25,7 @@
             <!-- Profile dropdown -->
             <div class="relative ml-3">
                 <div>
-                    <a href="/admin" class="flex items-center cursor-pointer transition-all bg-yellow-500 text-white px-6 py-2 rounded-lg
+                    <a href="/login" class="flex items-center cursor-pointer transition-all bg-yellow-500 text-white px-6 py-2 rounded-lg
                                   border-yellow-600
                                   border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
                                   active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
@@ -72,7 +72,7 @@
       <div class="border-t border-yellow-700 pb-3 pt-4">
         <div class="flex items-center px-5 w-full">
             <div class="w-full">
-              <a href="/admin" class="flex items-center justify-center w-full cursor-pointer transition-all bg-yellow-500 text-white px-6 py-2 rounded-lg
+              <a href="/login" class="flex items-center justify-center w-full cursor-pointer transition-all bg-yellow-500 text-white px-6 py-2 rounded-lg
                                 border-yellow-600
                                 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
                                 active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">

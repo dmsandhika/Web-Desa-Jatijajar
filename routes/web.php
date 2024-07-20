@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Letter;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Struktur;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
@@ -74,34 +75,41 @@ Route::get('/surat/form_domisili_lembaga', function () {
 Route::get('/surat/form_beda_identitas', function () {
     return view('surat.form.beda_identitas', ['title'=>'Form Surat Keterangan Beda Identitas']);
 });
-Route::get('/admin', function () {
-    return view('admin.index', ['title'=>'Dashboard']);
-});
-Route::get('/admin/surat', function () {
-    return view('admin.surat', ['title'=>'Kelola Surat']);
-});
 
-Route::get('admin/artikel/daftar', function () {
-    return view('admin.artikel', [
-        'title' => 'Artikel Kegiatan Desa',
-        'blog' => Article::all()
-    ]);
-})->name('article.list');
 
-Route::get('/admin/artikel/kategori', function () {
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.index', ['title'=>'Dashboard']);
+    });
+    Route::get('/admin/surat', function () {
+        return view('admin.surat', ['title'=>'Kelola Surat']);
+    });
+    
+    Route::get('admin/artikel/daftar', function () {
+        return view('admin.artikel', [
+            'title' => 'Artikel Kegiatan Desa',
+            'blog' => Article::all()
+        ]);
+    })->name('article.list');
+    Route::get('/admin/artikel/kategori', function () {
     return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
-})->name('kategori.list');
-Route::post('/admin/artikel/kategori', [CategoryController::class, 'store'])->name('kategori.store');
-Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
+    })->name('kategori.list');
+    Route::post('/admin/artikel/kategori', [CategoryController::class, 'store'])->name('kategori.store');
+    Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
 
-Route::get('/admin/struktur', function () {
-    return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa', 'strk'=>Struktur::all()]);
-})->name('struktur.index');
-Route::get('/admin/struktur/create', [ StrukturController::class, 'create'])->name('struktur.create');
-Route::post('/admin/struktur/', [ StrukturController::class, 'store'])->name('struktur.store');
-Route::get('/admin/struktur/{id}/edit', [StrukturController::class, 'edit'])->name('struktur.edit');
-Route::put('/admin/struktur/{id}', [StrukturController::class, 'update'])->name('struktur.update');
-Route::get('/admin/artikel/{id}/edit', [ArticleController::class, 'edit'])->name('artikel.edit');
-Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
-Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');
-Route::get('/articles/count', [ArticleController::class, 'countArticles']);
+    Route::get('/admin/struktur', function () {
+        return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa', 'strk'=>Struktur::all()]);
+    })->name('struktur.index');
+    Route::get('/admin/struktur/create', [ StrukturController::class, 'create'])->name('struktur.create');
+    Route::post('/admin/struktur/', [ StrukturController::class, 'store'])->name('struktur.store');
+    Route::get('/admin/struktur/{id}/edit', [StrukturController::class, 'edit'])->name('struktur.edit');
+    Route::put('/admin/struktur/{id}', [StrukturController::class, 'update'])->name('struktur.update');
+    Route::get('/admin/artikel/{id}/edit', [ArticleController::class, 'edit'])->name('artikel.edit');
+    Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
+    Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');
+    Route::get('/articles/count', [ArticleController::class, 'countArticles']);
+        
+});

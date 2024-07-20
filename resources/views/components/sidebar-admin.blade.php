@@ -34,8 +34,11 @@
         </nav>
     </div>
     <div class="absolute bottom-0 p-6 w-full">
-        <a href="/" class="text-white text-base font-semibold hover:text-gray-300">
-            <i class="fas fa-sign-out-alt mr-3"></i> Logout
-        </a>
+        <form action="/logout" method="POST">
+            @csrf
+            <button class="text-white text-base font-semibold hover:text-gray-300">
+                <i class="fas fa-sign-out-alt mr-3"></i> Logout
+            </button>
+        </form>
     </div>
 </aside>
