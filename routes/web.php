@@ -7,6 +7,7 @@ use App\Models\Struktur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StrukturController;
 
 Route::get('/', [ArticleController::class, 'latestArticles']);
 Route::get('/profil', function () {
@@ -95,7 +96,11 @@ Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destr
 
 Route::get('/admin/struktur', function () {
     return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa', 'strk'=>Struktur::all()]);
-});
+})->name('struktur.index');
+Route::get('/admin/struktur/create', [ StrukturController::class, 'create'])->name('struktur.create');
+Route::post('/admin/struktur/', [ StrukturController::class, 'store'])->name('struktur.store');
+Route::get('/admin/struktur/{id}/edit', [StrukturController::class, 'edit'])->name('struktur.edit');
+Route::put('/admin/struktur/{id}', [StrukturController::class, 'update'])->name('struktur.update');
 Route::get('/admin/artikel/{id}/edit', [ArticleController::class, 'edit'])->name('artikel.edit');
 Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
 Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');

@@ -6,7 +6,7 @@
  
 <div class="relative overflow-x-auto">
   <div class="flex justify-end mb-4">
-    <a href="" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 mt-5 text-white font-bold py-2 px-4 rounded">
+    <a href="{{ route('struktur.create') }}" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 mt-5 text-white font-bold py-2 px-4 rounded">
         <i class="fas fa-plus mr-2"></i> Tambah
     </a>
   </div>
@@ -56,7 +56,7 @@
             {{ $s['desc'] }}
           </td>
       <td class="px-6 py-4">
-        <a href="#" class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">
+        <a href="{{ route('struktur.edit', $s->id) }}" class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">
             <i class="fas fa-pencil-alt mr-2"></i> Edit
         </a>
     </td>
