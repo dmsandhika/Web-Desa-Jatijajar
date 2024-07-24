@@ -5,7 +5,7 @@
           <div class="flex-shrink-0">
             <a href="/">
 
-              <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+              <img class="h-10 w-10" src="https://i.ibb.co.com/nD5b5FF/Jatijajar.png" alt="Desa Jatijajar">
             </a>
           </div>
           <div class="hidden md:block">
@@ -14,7 +14,7 @@
               <x-nav-link href="/profil" :active="request()-> is('profil')">Profil</x-nav-link>
               <x-nav-link href="/struktur" :active="request()-> is('struktur')">Struktur</x-nav-link>
               <x-nav-link href="/article" :active="request()-> is('article')">Artikel</x-nav-link>
-              <x-nav-link href="/surat" :active="request()-> is('surat')">Layanan</x-nav-link>
+              <x-nav-link href="/surat" :active="request()-> is('surat*')">Layanan</x-nav-link>
               
             </div>
           </div>
@@ -67,7 +67,7 @@
         <x-nav-link-mob href="/profil" :active="request()-> is('profil')">Profil</x-nav-link-mob>
         <x-nav-link-mob href="/struktur" :active="request()-> is('struktur')">Struktur</x-nav-link-mob>
         <x-nav-link-mob href="/article" :active="request()-> is('article')">Artikel</x-nav-link-mob>
-        <x-nav-link-mob href="/surat" :active="request()-> is('surat')">Layanan</x-nav-link-mob>
+        <x-nav-link-mob href="/surat" :active="request()-> is('surat*')">Layanan</x-nav-link-mob>
       </div>
       <div class="border-t border-yellow-700 pb-3 pt-4">
         <div class="flex items-center px-5 w-full">

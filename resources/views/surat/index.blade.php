@@ -5,11 +5,11 @@
    $data = [
     [
         'title' => 'Keterangan Belum Nikah',
-        'href' => '/surat/form_belumnikah',
+        'href' => route('belumnikah.create'),
     ],
     [
         'title' => 'Keterangan Domisili',
-        'href' => '/surat/form_domisili',
+        'href' => route('domisili.create'),
     ],
     [
         'title' => 'Keterangan Lahir',
@@ -75,6 +75,12 @@
  
   @endphp
 
+<div class="flex justify-end p-5">
+    <a href="{{ route('surat.search') }}"
+       class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-[#faca15] hover:bg-white cursor-pointer hover:border-[#faca15] hover:text-[#faca15] focus:text-[#faca15] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200">
+      Cek Surat
+    </a>
+  </div>
   <div class="grid gap-6 lg:grid-cols-4 sm:grid-cols-2">
     @foreach($data as $item)
       <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

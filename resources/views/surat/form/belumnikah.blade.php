@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('belumnikah.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
@@ -58,4 +58,24 @@
       </div>
     </div>
   </form>
+  @if (session('success'))
+    <script>
+      Swal.fire({
+        title: 'Sukses!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+    </script>
+  @endif
+  @if (session('error'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: '{{ session('error') }}'
+        });
+    </script>
+@endif
 </x-layout>

@@ -9,6 +9,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
+use App\Http\Controllers\DataSuratController;
+use App\Http\Controllers\Surat\DomisiliFormController;
+use App\Http\Controllers\Surat\BelumnikahFormController;
 
 Route::get('/', [ArticleController::class, 'latestArticles']);
 Route::get('/profil', function () {
@@ -27,12 +30,11 @@ Route::post('/articles', [ArticleController::class, 'store'])->name('articles.st
 Route::get('/surat', function () {
     return view('surat.index', ['title'=>'Pengajuan Surat']);
 });
-Route::get('surat/form_belumnikah', function () {
-    return view('surat.form.belumnikah', ['title'=>'Form Surat Keterangan Belum Nikah']);
-});
-Route::get('/surat/form_domisili', function () {
-    return view('surat.form.domisili', ['title'=>'Form Surat Keterangan Domisili']);
-});
+Route::get('surat/lacak', [DataSuratController::class, 'search'])->name('surat.search');
+Route::get('surat/form_belumnikah', [BelumnikahFormController::class, 'create'])->name('belumnikah.create');
+Route::post('surat/form_belumnikah', [BelumnikahFormController::class, 'store'])->name('belumnikah.store');
+Route::get('/surat/form_domisili', [DomisiliFormController::class, 'create'])->name('domisili.create');
+Route::post('/surat/form_domisili', [DomisiliFormController::class, 'store'])->name('domisili.store');
 Route::get('/surat/form_lahir', function () {
     return view('surat.form.lahir', ['title'=>'Form Surat Keterangan Lahir']);
 });
@@ -82,12 +84,10 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', function () {
-        return view('admin.index', ['title'=>'Dashboard']);
-    });
-    Route::get('/admin/surat', function () {
-        return view('admin.surat', ['title'=>'Kelola Surat']);
-    });
-    
+            return view('admin.index', ['title'=>'Dashboard']);
+        });
+    Route::get('/admin/surat', [DataSuratController::class, 'index'])->name('admin.surat');
+        
     Route::get('admin/artikel/daftar', function () {
         return view('admin.artikel', [
             'title' => 'Artikel Kegiatan Desa',
@@ -111,5 +111,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
     Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');
     Route::get('/articles/count', [ArticleController::class, 'countArticles']);
+    Route::get('/surat/count', [DatasuratController::class, 'count']);
+    Route::get('/admin/surat/Domisili/{id}', [DomisiliFormController::class, 'edit'])->name('surat.domisili.detail');
+    Route::delete('/admin/surat/Domisili/{id}', [DomisiliFormController::class, 'destroy'])->name('surat.domisili.delete');
+    Route::get('/admin/surat/Belumnikah/{id}', [BelumnikahFormController::class, 'edit'])->name('surat.belumnikah.detail');
+    Route::delete('/admin/surat/Belumnikah/{id}', [BelumnikahFormController::class, 'destroy'])->name('surat.belumnikah.delete');
         
 });
