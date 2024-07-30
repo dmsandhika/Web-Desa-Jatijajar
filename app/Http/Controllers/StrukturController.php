@@ -33,7 +33,7 @@ class StrukturController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
-            'nip' => 'required|string|max:255',
+            'nip' => 'nullable|string|max:255',
             'desc' => 'nullable|string',
         ]);
 

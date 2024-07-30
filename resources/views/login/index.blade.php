@@ -60,9 +60,12 @@
   </div>
 
   @endif
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex min-h-full flex-col justify-center px-6 py-10 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login Admin</h2>
+        <div class="flex justify-center items-center">
+          <img src="https://i.ibb.co.com/nD5b5FF/Jatijajar.png" class="">
+        </div>
     </div>
   
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

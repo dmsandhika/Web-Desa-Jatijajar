@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('kuasa.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
@@ -12,42 +12,18 @@
          
 
           <div class="col-span-full">
-            <label for="nama_lengkap" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
-            <input type="text" name="nama_lengkap" id="nama_lengkap" placeholder="NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <label for="nik" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
+            <input type="number" name="nik" id="nik" placeholder="NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
           <div class="col-span-full">
-            <label for="nama_lengkap" class="block text-sm font-medium leading-6 text-gray-900">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <label for="nama" class="block text-sm font-medium leading-6 text-gray-900">Nama Lengkap</label>
+            <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
-
-          <div class="col-span-full sm:flex sm:space-x-4">
-            <div class="sm:w-1/2">
-              <label for="tempat_lahir" class="block text-sm font-medium leading-6 text-gray-900">Tempat Lahir</label>
-              <input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <div class="col-span-full">
+            <label for="ktp_pemberi" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KTP Pemberi Kuasa</label>
+            <div class="mt-2">
+              <input type="file" name="ktp_pemberi" id="ktp_pemberi" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
-            <div class="sm:w-1/2">
-              <label for="tanggal_lahir" class="block text-sm font-medium leading-6 text-gray-900">Tanggal Lahir</label>
-              <input type="date" name="tanggal_lahir" id="tanggal_lahir" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-          </div>
-
-          <div class="col-span-full">
-            <label for="jenis_kelamin" class="block text-sm font-medium leading-6 text-gray-900">Jenis Kelamin</label>
-            <select name="jenis_kelamin" id="jenis_kelamin" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              <option value="">Pilih</option>
-              <option value="Laki-laki">Laki Laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-
-          <div class="col-span-full">
-            <label for="pekerjaan" class="block text-sm font-medium leading-6 text-gray-900">Pekerjaan</label>
-            <input type="text" name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
-
-          <div class="col-span-full">
-            <label for="alamat" class="block text-sm font-medium leading-6 text-gray-900">Alamat</label>
-            <textarea id="alamat" name="alamat" rows="3" placeholder="Alamat ..." class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
           </div>
 
           <div class="col-span-full">
@@ -56,8 +32,8 @@
           </div>
 
           <div class="col-span-full">
-            <label for="nomor_telepon" class="block text-sm font-medium leading-6 text-gray-900">Nomor Yang Bisa Dihubungi</label>
-            <input type="text" name="nomor_telepon" id="nomor_telepon" placeholder="Masukkan nomor telepon" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <label for="no" class="block text-sm font-medium leading-6 text-gray-900">Nomor Yang Bisa Dihubungi</label>
+            <input type="text" name="no" id="no" placeholder="Masukkan nomor telepon" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
       </div>
@@ -68,43 +44,14 @@
         
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="col-span-full">
-            <label for="nama_lengkap" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
-            <input type="text" name="nama_lengkap" id="nama_lengkap" placeholder="NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
-
-          <div class="col-span-full">
-            <label for="nama_lengkap_penerima" class="block text-sm font-medium leading-6 text-gray-900">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap_penerima" id="nama_lengkap_penerima" placeholder="Nama Lengkap" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
-
-          <div class="col-span-full sm:flex sm:space-x-4">
-            <div class="sm:w-1/2">
-              <label for="tempat_lahir_penerima" class="block text-sm font-medium leading-6 text-gray-900">Tempat Lahir</label>
-              <input type="text" name="tempat_lahir_penerima" id="tempat_lahir_penerima" placeholder="Tempat Lahir" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            </div>
-            <div class="sm:w-1/2">
-              <label for="tanggal_lahir_penerima" class="block text-sm font-medium leading-6 text-gray-900">Tanggal Lahir</label>
-              <input type="date" name="tanggal_lahir_penerima" id="tanggal_lahir_penerima" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <label for="ktp_penerima" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KTP Penerima Kuasa</label>
+            <div class="mt-2">
+              <input type="file" name="ktp_penerima" id="ktp_penerima" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
-
           <div class="col-span-full">
-            <label for="jenis_kelamin_penerima" class="block text-sm font-medium leading-6 text-gray-900">Jenis Kelamin</label>
-            <select name="jenis_kelamin_penerima" id="jenis_kelamin_penerima" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              <option value="">Pilih</option>
-              <option value="Laki-laki">Laki Laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-
-          <div class="col-span-full">
-            <label for="pekerjaan_penerima" class="block text-sm font-medium leading-6 text-gray-900">Pekerjaan</label>
-            <input type="text" name="pekerjaan_penerima" id="pekerjaan_penerima" placeholder="Pekerjaan" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
-
-          <div class="col-span-full">
-            <label for="alamat_penerima" class="block text-sm font-medium leading-6 text-gray-900">Alamat</label>
-            <textarea id="alamat_penerima" name="alamat_penerima" rows="3" placeholder="Alamat ..." class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+            <label for="hubungan" class="block text-sm font-medium leading-6 text-gray-900">Hubungan Dengan Pemberi Kuasa</label>
+            <input type="text" name="hubungan" id="hubungan" placeholder="Hubungan" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
       </div>
@@ -119,4 +66,25 @@
       </div>
     </div>
   </form>
+  @if(session('success'))
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
+      });
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

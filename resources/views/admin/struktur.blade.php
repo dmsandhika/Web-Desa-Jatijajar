@@ -5,8 +5,14 @@
   
  
 <div class="relative overflow-x-auto">
-  <div class="flex justify-end mb-4">
-    <a href="{{ route('struktur.create') }}" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 mt-5 text-white font-bold py-2 px-4 rounded">
+  <div class="flex justify-between mb-4 mt-5">
+ 
+    <a href="{{ route('banner.edit') }}" class="inline-flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-edit mr-2"></i> Ubah Banner Struktur
+    </a>
+    
+  
+    <a href="{{ route('struktur.create') }}" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         <i class="fas fa-plus mr-2"></i> Tambah
     </a>
   </div>

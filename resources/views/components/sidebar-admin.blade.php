@@ -21,7 +21,7 @@
                     <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="ml-auto"></i>
                 </button>
                 <div x-show="open" class="mt-2  rounded-md shadow-lg">
-                    <x-side-link href="/admin/artikel/daftar" :active="request()->is('admin/artikel/daftar')">
+                    <x-side-link href="{{ route('admin.article') }}" :active="request()->is('admin/artikel/daftar')">
                         <i class="fas fa-newspaper mr-3"></i> Daftar Artikel
                     </x-side-link>
                     <x-side-link href="/admin/artikel/kategori" :active="request()->is('admin/artikel/kategori')">
@@ -33,12 +33,22 @@
 
         </nav>
     </div>
-    <div class="absolute bottom-0 p-6 w-full">
-        <form action="/logout" method="POST">
-            @csrf
-            <button class="text-white text-base font-semibold hover:text-gray-300">
-                <i class="fas fa-sign-out-alt mr-3"></i> Logout
-            </button>
-        </form>
+    <div class="absolute bottom-0 w-full">
+        <div class="mb-4 hover:bg-blue-700 p-3">
+            <a href="/">
+                <button class="text-white text-base font-semibold hover:text-gray-300 ">
+                    <i class="fas fa-home mr-3"></i> Home
+                </button>
+            </a>
+        </div>
+        <div class="hover:bg-blue-700 p-3">
+            <form action="/logout" method="POST">
+                @csrf
+                <button class="text-white text-base font-semibold hover:text-gray-300 ">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </button>
+            </form>
+        </div>
     </div>
+    
 </aside>

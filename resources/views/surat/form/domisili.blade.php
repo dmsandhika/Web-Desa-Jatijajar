@@ -100,14 +100,25 @@
       </div>
     </div>
   </form>
-  @if (session('success'))
-    <script>
+  @if(session('success'))
+  <script>
       Swal.fire({
-        title: 'Sukses!',
-        text: '{{ session('success') }}',
-        icon: 'success',
-        confirmButtonText: 'OK'
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
       });
-    </script>
-  @endif
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

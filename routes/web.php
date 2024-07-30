@@ -1,26 +1,43 @@
 <?php
 
+use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Struktur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\DataSuratController;
+use App\Http\Controllers\Surat\EktpFormController;
+use App\Http\Controllers\Surat\SkckFormController;
+use App\Http\Controllers\Surat\SktmFormController;
+use App\Http\Controllers\Surat\KuasaFormController;
+use App\Http\Controllers\Surat\LahirFormController;
+use App\Http\Controllers\Surat\UsahaFormController;
 use App\Http\Controllers\Surat\DomisiliFormController;
+use App\Http\Controllers\Surat\KeramaianFormController;
+use App\Http\Controllers\Surat\MeninggalFormController;
 use App\Http\Controllers\Surat\BelumnikahFormController;
+use App\Http\Controllers\Surat\KehilanganFormController;
+use App\Http\Controllers\Surat\PenghasilanFormController;
+use App\Http\Controllers\Surat\RekomendasiFormController;
 
 Route::get('/', [ArticleController::class, 'latestArticles']);
 Route::get('/profil', function () {
     return view('profil', ['title'=>'Profil Desa']);
 });
 Route::get('/struktur', function () {
-    return view('struktur', ['title'=>'Struktur Organisasi Desa', 'struktur'=>Struktur::all()]);
+    return view('struktur', ['title'=>'Struktur Organisasi Desa', 'struktur'=>Struktur::all(), 'bnr'=>Banner::findOrFail(1)]);
 });
-Route::get('/article', [ArticleController::class, 'index'])->name('articles.index');;
+Route::get('/article', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/article/succes', function(){
+    return view('articles.success');
+})->name('articles.success');
 Route::get('/article/{article:slug}', function(Article $article){
     return view('articles.single-article', ['title'=>'Single Post', 'article'=>$article]);
 });
@@ -30,70 +47,48 @@ Route::post('/articles', [ArticleController::class, 'store'])->name('articles.st
 Route::get('/surat', function () {
     return view('surat.index', ['title'=>'Pengajuan Surat']);
 });
-Route::get('surat/lacak', [DataSuratController::class, 'search'])->name('surat.search');
-Route::get('surat/form_belumnikah', [BelumnikahFormController::class, 'create'])->name('belumnikah.create');
-Route::post('surat/form_belumnikah', [BelumnikahFormController::class, 'store'])->name('belumnikah.store');
+Route::get('/surat/lacak', [DataSuratController::class, 'search'])->name('surat.search');
+Route::get('/surat/form_belumnikah', [BelumnikahFormController::class, 'create'])->name('belumnikah.create');
+Route::post('/surat/form_belumnikah', [BelumnikahFormController::class, 'store'])->name('belumnikah.store');
 Route::get('/surat/form_domisili', [DomisiliFormController::class, 'create'])->name('domisili.create');
 Route::post('/surat/form_domisili', [DomisiliFormController::class, 'store'])->name('domisili.store');
-Route::get('/surat/form_lahir', function () {
-    return view('surat.form.lahir', ['title'=>'Form Surat Keterangan Lahir']);
-});
-Route::get('/surat/form_meninggal', function () {
-    return view('surat.form.meninggal', ['title'=>'Form Surat Keterangan Meninggal']);
-});
-Route::get('/surat/form_tidakmampu', function () {
-    return view('surat.form.tidakmampu', ['title'=>'Form Surat Keterangan Tidak Mampu']);
-});
-Route::get('/surat/form_usaha', function () {
-    return view('surat.form.usaha', ['title'=>'Form Surat Keterangan Usaha']);
-});
-Route::get('/surat/form_keramaian', function () {
-    return view('surat.form.keramaian', ['title'=>'Form Surat Izin Keramaian']);
-});
-Route::get('/surat/form_ektp', function () {
-    return view('surat.form.ektp', ['title'=>'Form Surat Pengantar E-Ktp']);
-});
-Route::get('/surat/form_skck', function () {
-    return view('surat.form.skck', ['title'=>'Form Surat Pengantar SKCK']);
-});
-Route::get('/surat/form_kehilangan', function () {
-    return view('surat.form.kehilangan', ['title'=>'Form Surat Keterangan Kehilangan']);
-});
-Route::get('/surat/form_penghasilan', function () {
-    return view('surat.form.penghasilan', ['title'=>'Form Surat Keterangan Penghasilan']);
-});
-Route::get('/surat/form_rekomendasi', function () {
-    return view('surat.form.rekomendasi', ['title'=>'Form Surat Rekomendasi']);
-});
-Route::get('/surat/form_hasil_ortu', function () {
-    return view('surat.form.hasilortu', ['title'=>'Form Surat Keterangan Penghasilan Orang Tua']);
-});
-Route::get('/surat/form_kuasa', function () {
-    return view('surat.form.kuasa', ['title'=>'Form Surat Permohonan Kuasa']);
-});
-Route::get('/surat/form_domisili_lembaga', function () {
-    return view('surat.form.domisili_lembaga', ['title'=>'Form Surat Keterangan Domisili Lembaga']);
-});
-Route::get('/surat/form_beda_identitas', function () {
-    return view('surat.form.beda_identitas', ['title'=>'Form Surat Keterangan Beda Identitas']);
-});
+Route::get('/surat/form_lahir', [LahirFormController::class, 'create'])->name('lahir.create');
+Route::post('/surat/form_lahir', [LahirFormController::class, 'store'])->name('lahir.store');
+Route::get('/surat/form_meninggal', [MeninggalFormController::class, 'create'])->name('meninggal.create');
+Route::post('/surat/form_meninggal', [MeninggalFormController::class, 'store'])->name('meninggal.store');
+Route::get('/surat/form_tidakmampu', [SktmFormController::class, 'create'])->name('sktm.create');
+Route::post('/surat/form_tidakmampu', [SktmFormController::class, 'store'])->name('sktm.store');
+Route::get('/surat/form_usaha', [UsahaFormController::class, 'create'])->name('usaha.create');
+Route::post('/surat/form_usaha', [UsahaFormController::class, 'store'])->name('usaha.store');
+Route::get('/surat/form_keramaian', [KeramaianFormController::class, 'create'])->name('keramaian.create');
+Route::post('/surat/form_keramaian', [KeramaianFormController::class, 'store'])->name('keramaian.store');
+Route::get('/surat/form_ektp', [EktpFormController::class, 'create'])->name('ektp.create');
+Route::post('/surat/form_ektp', [EktpFormController::class, 'store'])->name('ektp.store');
+Route::get('/surat/form_skck', [SkckFormController::class, 'create'])->name('skck.create');
+Route::post('/surat/form_skck', [SkckFormController::class, 'store'])->name('skck.store');
+Route::get('/surat/form_kehilangan', [KehilanganFormController::class,'create'])->name('hilang.create');
+Route::post('/surat/form_kehilangan', [KehilanganFormController::class,'store'])->name('hilang.store');
+Route::get('/surat/form_penghasilan', [PenghasilanFormController::class, 'create'])->name('hasil.create');
+Route::post('/surat/form_penghasilan', [PenghasilanFormController::class, 'store'])->name('hasil.store');
+Route::get('/surat/form_rekomendasi', [RekomendasiFormController::class, 'create'])->name('rekomendasi.create');
+Route::post('/surat/form_rekomendasi', [RekomendasiFormController::class, 'store'])->name('rekomendasi.store');
+Route::get('/surat/form_kuasa', [KuasaFormController::class, 'create'])->name('kuasa.create');
+Route::post('/surat/form_kuasa', [KuasaFormController::class, 'store'])->name('kuasa.store');
 
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', function () {
-            return view('admin.index', ['title'=>'Dashboard']);
-        });
+    Route::get('/admin', [ChartController::class, 'barChart']);
     Route::get('/admin/surat', [DataSuratController::class, 'index'])->name('admin.surat');
-        
-    Route::get('admin/artikel/daftar', function () {
-        return view('admin.artikel', [
-            'title' => 'Artikel Kegiatan Desa',
-            'blog' => Article::all()
-        ]);
-    })->name('article.list');
+    Route::get('/admin/surat/diajukan', [DataSuratController::class, 'diajukan'])->name('admin.surat.diajukan');
+    Route::get('/admin/surat/ditolak', [DataSuratController::class, 'ditolak'])->name('admin.surat.ditolak');
+    Route::get('/admin/surat/selesai', [DataSuratController::class, 'selesai'])->name('admin.surat.selesai');
+    Route::get('/admin/artikel/daftar', [ArticleController::class, 'all'])->name('admin.article');
+    Route::get('/admin/artikel/daftar/diajukan', [ArticleController::class, 'diajukan'])->name('article.list.diajukan');
+    Route::get('/admin/artikel/daftar/ditolak', [ArticleController::class, 'ditolak'])->name('article.list.ditolak');
+    Route::get('/admin/artikel/daftar/daftar', [ArticleController::class, 'diterima'])->name('article.list.diterima');
     Route::get('/admin/artikel/kategori', function () {
     return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
     })->name('kategori.list');
@@ -104,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.struktur', ['title'=>'Struktur Kepengurusan Desa', 'strk'=>Struktur::all()]);
     })->name('struktur.index');
     Route::get('/admin/struktur/create', [ StrukturController::class, 'create'])->name('struktur.create');
+    Route::get('/admin/banner/edit', [ BannerController::class, 'edit'])->name('banner.edit');
+    Route::put('/admin/banner/edit', [ BannerController::class, 'update'])->name('banner.update');
     Route::post('/admin/struktur/', [ StrukturController::class, 'store'])->name('struktur.store');
     Route::get('/admin/struktur/{id}/edit', [StrukturController::class, 'edit'])->name('struktur.edit');
     Route::put('/admin/struktur/{id}', [StrukturController::class, 'update'])->name('struktur.update');
@@ -116,5 +113,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/surat/Domisili/{id}', [DomisiliFormController::class, 'destroy'])->name('surat.domisili.delete');
     Route::get('/admin/surat/Belumnikah/{id}', [BelumnikahFormController::class, 'edit'])->name('surat.belumnikah.detail');
     Route::delete('/admin/surat/Belumnikah/{id}', [BelumnikahFormController::class, 'destroy'])->name('surat.belumnikah.delete');
+    Route::put('/admin/surat/Belumnikah/{id}', [BelumnikahFormController::class, 'update'])->name('surat.belumnikah.update');
         
 });

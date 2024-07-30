@@ -1,6 +1,12 @@
 <x-layout-admin>
   <x-slot:title>{{ $title }}</x-slot>
 
+  <div class="mt-6 flex items-center gap-x-4 mb-9">
+      <button onclick="window.location='{{ route('admin.surat')}}'" class="rounded-md bg-gray-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500">Semua</button>
+      <button onclick="window.location='{{ route('admin.surat.diajukan') }}'" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Diajukan</button>
+      <button onclick="window.location='{{ route('admin.surat.ditolak')}}'" class="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">Ditolak</button>
+      <button onclick="window.location='{{ route('admin.surat.selesai')}}'" class="rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Selesai</button>
+    </div>
   <div class="relative overflow-x-auto ">
       <table id="dataTable"  class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-6">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -27,7 +33,7 @@
                   <td class="px-6 py-4">{{ $s->nama }}</td>
                   <td class="px-6 py-4">{{ $s->jenis_surat }}</td>
                   <td class="px-6 py-4">
-                      {{ \Carbon\Carbon::parse($s->created_at)->format('d-m-Y H:i') }}
+                      {{ \Carbon\Carbon::parse($s->created_at)->format('d-m-Y') }}
                   </td>
                   @php
                       $status = $s['status'];
@@ -67,9 +73,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const deleteButtons = document.querySelectorAll('.delete-button');
-
-
         @if(session('success'))
         Swal.fire({
             icon: 'success',

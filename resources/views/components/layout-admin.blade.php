@@ -4,8 +4,9 @@
     <meta charset="UTF-8" >
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Admin Template</title>
-    <meta name="author" content="David Grzyb">
+    <title>Admin</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/nD5b5FF/Jatijajar.png">
+    <meta name="author" content="Dimas Andhika">
     <meta name="description" content="">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -19,6 +20,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
         .font-family-karla { font-family: karla; }
@@ -40,7 +43,7 @@
             {{$slot}}
         </main>
         <footer class="w-full bg-white text-right p-4">
-            Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">Desa Jatijajar</a>.
+            Built by <a target="_blank" href="https://dmsandhika.my.id" class="underline">Desa Jatijajar</a>.
         </footer>
     </div>
 
@@ -60,6 +63,21 @@
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
+
+        function openFullScreen(imageSrc) {
+        var modal = document.getElementById('fullScreenModal');
+        var image = document.getElementById('fullScreenImage');
+        image.src = imageSrc;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        }
+
+        function closeFullScreen() {
+        var modal = document.getElementById('fullScreenModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        }
     </script>
+
 </body>
 </html>

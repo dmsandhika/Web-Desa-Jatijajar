@@ -81,7 +81,7 @@
                     <td class="px-6 py-4">{{ $s->nik }}</td>
                     <td class="px-6 py-4">{{ $s->nama }}</td>
                     <td class="px-6 py-4">{{ $s->jenis_surat }}</td>
-                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($s->created_at)->format('d-m-Y H:i') }}</td>
+                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($s->created_at)->format('d-m-Y') }}</td>
                     @php
                         $status = $s->status;
                         $bgColor = '';
@@ -99,7 +99,7 @@
                     </td>
                     <td class="px-6 py-4">
                       @if (!empty($s->file))
-                            <a href="{{ $s->file }}" class="inline-flex items-center bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-1 px-2 rounded">
+                            <a href="{{ asset($s->file) }}" class="inline-flex items-center bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-1 px-2 rounded">
                                 Unduh File
                             </a>
                         @else

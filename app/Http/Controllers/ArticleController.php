@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -58,27 +59,35 @@ class ArticleController extends Controller
             'content' => 'required|string',
             'photo' => 'nullable|image|max:10240',
         ]);
-
+    
         $slug = Str::slug($request->title, '-');
-
-        $article = new Article();
-        $article->title = $request->title;
-        $article->category_id = $request->category;
-        $article->author = $request->author;
-        $article->content = $request->content;
-        $article->slug = $slug;
-
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoPath = 'artikel/' . $photo->getClientOriginalName();
-            $photo->move(public_path('artikel'), $photo->getClientOriginalName());
-            $article->photo = $photoPath;
+        try {    
+            $article = new Article();
+            $article->title = $request->title;
+            $article->category_id = $request->category;
+            $article->author = $request->author;
+            $article->content = $request->content;
+            $article->slug = $slug;
+    
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $photoPath = 'artikel/' . $photo->getClientOriginalName();
+                $photo->move(public_path('artikel'), $photo->getClientOriginalName());
+                $article->photo = $photoPath;
+            }
+    
+            $article->save();
+    
+    
+            return redirect()->route('  articles.success')->with('success', 'Artikel Berhasil Diajukan');
+        } catch (\Exception $e) {
+            Log::error('Error storing article form: ' . $e->getMessage());
+    
+    
+            return redirect()->route('articles.index')->with('error', 'Terjadi kesalahan saat mengajukan artikel');
         }
-
-        $article->save();
-
-        return redirect()->route('articles.index')->with('success', 'Article created successfully.');
     }
+    
 
     /**
      * Display the specified resource.
@@ -142,7 +151,7 @@ class ArticleController extends Controller
     
         $article->save();
     
-        return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
+        return redirect()->route('article.list')->with('success', 'Article updated successfully.');
     }
     
 
@@ -179,6 +188,30 @@ class ArticleController extends Controller
         'submittedArticlesCount' => $submittedArticlesCount,
         'acceptedArticlesCount' => $acceptedArticlesCount
     ]);
+}
+public function all(){
+    $blog = Article::all();
+    $title = 'Artikel Kegiatan Desa';
+
+    return view('admin.artikel', compact('blog', 'title'));
+}
+public function diajukan(){
+    $blog = Article::where('status', 'diajukan')->get();
+    $title = 'Artikel Kegiatan Desa';
+
+    return view('admin.artikel', compact('blog', 'title'));
+}
+public function ditolak(){
+    $blog = Article::where('status', 'ditolak')->get();
+    $title = 'Artikel Kegiatan Desa';
+
+    return view('admin.artikel', compact('blog', 'title'));
+}
+public function diterima(){
+    $blog = Article::where('status', 'diterima')->get();
+    $title = 'Artikel Kegiatan Desa';
+
+    return view('admin.artikel', compact('blog', 'title'));
 }
     
 }

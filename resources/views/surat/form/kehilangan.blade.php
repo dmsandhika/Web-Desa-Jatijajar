@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('hilang.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12 ">
       <div class="border-b border-gray-900/10 pb-12 ">
@@ -9,7 +9,7 @@
           <div class="col-span-full">
             <label for="nik" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
             <div class="mt-2">
-              <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="number" name="nik" id="nik" placeholder="Masukkan NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
 
@@ -21,28 +21,22 @@
             </div>
           </div>
           <div class="col-span-full">
-            <label for="nama" class="block text-sm font-medium leading-6 text-gray-900">Nama Barang/Dokumen</label>
+            <label for="barang" class="block text-sm font-medium leading-6 text-gray-900">Nama Barang/Dokumen</label>
             <div class="mt-2">
-              <input type="text" placeholder="Nama Barang/Dokumen" name="nama" id="nama" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" placeholder="Nama Barang/Dokumen" name="barang" id="barang" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full">
-            <label for="content" class="block text-sm font-medium leading-6 text-gray-900">Lokasi Kehilangan</label>
+            <label for="lokasi" class="block text-sm font-medium leading-6 text-gray-900">Lokasi Kehilangan</label>
             <div class="mt-2">
-              <textarea id="content" name="content" placeholder="Lokasi..." rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+              <textarea id="lokasi" name="lokasi" placeholder="Lokasi..." rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
           </div>
-          <div class="col-span-full sm:col-span-3 ">
-            <label for="tanggal_lahir_ayah" class="block text-sm font-medium leading-6 text-gray-900">Tanggal Lahir</label>
+          <div class="col-span-full">
+            <label for="ktp" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KTP</label>
             <div class="mt-2">
-              <input type="date" name="tanggal_lahir_ayah" id="tanggal_lahir_ayah" autocomplete="off" class="block w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="file" name="ktp" id="ktp" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
-          </div>
-        </div>
-        <div class="col-span-full mt-6">
-          <label for="no" class="block text-sm font-medium leading-6 text-gray-900">Keperluan</label>
-          <div class="mt-2">
-            <input type="number" placeholder="Keperluan" name="no" id="no" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="col-span-full mt-6">
@@ -63,4 +57,25 @@
       </div>
     </div>
   </form>
+  @if(session('success'))
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
+      });
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('skck.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12 ">
       <div class="border-b border-gray-900/10 pb-12 ">
@@ -45,4 +45,25 @@
       </div>
     </div>
   </form>
+  @if(session('success'))
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
+      });
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

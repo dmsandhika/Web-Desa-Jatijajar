@@ -13,62 +13,54 @@
     ],
     [
         'title' => 'Keterangan Lahir',
-        'href' => '/surat/form_lahir',
+        'href' => route('lahir.create'),
     ],
     [
         'title' => 'Keterangan Meninggal',
-        'href' => '/surat/form_meninggal',
+        'href' => route('meninggal.create'),
     ],
     [
         'title' => 'Keterangan Tidak Mampu',
-        'href' => '/surat/form_tidakmampu',
+        'href' => route('sktm.create'),
     ],
     [
         'title' => 'Keterangan Usaha',
-        'href' => '/surat/form_usaha',
+        'href' => route('usaha.create'),
     ],
     [
         'title' => 'Pengantar Izin Keramaian',
-        'href' => '/surat/form_keramaian',
+        'href' => route('keramaian.create'),
     ],
     [
         'title' => 'Pengantar E-Ktp',
-        'href' => '/surat/form_ektp',
+        'href' => route('ektp.create'),
     ],
     [
         'title' => 'Pengantar SKCK',
-        'href' => '/surat/form_skck',
+        'href' => route('skck.create'),
     ],
     [
         'title' => 'Keterangan Kehilangan',
-        'href' => '/surat/form_kehilangan',
+        'href' => route('hilang.create'),
     ],
     [
         'title' => 'Keterangan Penghasilan',
-        'href' => '/surat/form_penghasilan',
+        'href' => route('hasil.create'),
     ],
     [
         'title' => 'Surat Rekomendasi',
-        'href' => '/surat/form_rekomendasi',
-    ],
-    [
-        'title' => 'Keterangan Penghasilan Orang Tua',
-        'href' => '/surat/form_hasil_ortu',
+        'href' => route('rekomendasi.create'),
     ],
     [
         'title' => 'Permohonan Kuasa',
-        'href' => '/surat/form_kuasa',
+        'href' => route('kuasa.create'),
     ],
     [
-        'title' => 'Keterangan Domisili Lembaga',
-        'href' => '/surat/form_domisili_lembaga',
+        'title' => 'KIA (Kartu Identitas Anak)',
+        'href' => '#',
     ],
     [
-        'title' => 'Ket. Beda Identitas',
-        'href' => '/surat/form_beda_identitas',
-    ],
-    [
-        'title' => 'Keterangan Lainnya',
+        'title' => 'Surat Pengantar Nikah',
         'href' => '#',
     ],
 ];

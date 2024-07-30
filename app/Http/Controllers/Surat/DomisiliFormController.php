@@ -31,9 +31,10 @@ class DomisiliFormController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+{
+    try {
         $request->validate([
-           'nik' => 'required|string',
+            'nik' => 'required|string',
             'nama' => 'required|string',
             'tempatlahir' => 'required|string',
             'tgl' => 'required|date',
@@ -43,13 +44,14 @@ class DomisiliFormController extends Controller
             'alamat' => 'required|string',
             'keperluan' => 'required|string',
             'ktp' => 'required|file|mimes:jpg,png,pdf|max:2048',
-            'no' => 'required|numeric', 
+            'no' => 'required|numeric',
         ]);
+
         $ktp = $request->file('ktp');
         $ktpPath = 'ktp/' . $ktp->getClientOriginalName();
         $ktp->move(public_path('ktp'), $ktp->getClientOriginalName());
-        
-        $data = DomisiliForm::create([
+
+        DomisiliForm::create([
             'nik' => $request->input('nik'),
             'nama' => $request->input('nama'),
             'tempatlahir' => $request->input('tempatlahir'),
@@ -62,9 +64,13 @@ class DomisiliFormController extends Controller
             'no' => $request->input('no'),
             'ktp' => $ktpPath
         ]);
-        return redirect()->route('domisili.create')->with('success', 'Formulir berhasil diajukan.');
 
+        return redirect()->route('domisili.create')->with('success', 'Formulir berhasil diajukan.');
+    } catch (\Exception $e) {
+        return redirect()->route('domisili.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
+
 
     /**
      * Display the specified resource.
@@ -79,7 +85,12 @@ class DomisiliFormController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = DomisiliForm::find($id);
+        $title = 'Detail Surat';
+        
+        
+        return view('surat.submit.domisili', compact('data', 'title'));
+   
     }
 
     /**

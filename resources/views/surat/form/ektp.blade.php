@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('ektp.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
@@ -9,7 +9,7 @@
           <div class="col-span-full">
             <label for="nik" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
             <div class="mt-2">
-              <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="number" name="nik" id="nik" placeholder="Masukkan NIK" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
 
@@ -21,9 +21,9 @@
             </div>
           </div>
           <div class="col-span-full">
-            <label for="ktp" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KK</label>
+            <label for="kk" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KK</label>
             <div class="mt-2">
-              <input type="file" name="ktp" id="ktp" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="file" name="kk" id="kk" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
         </div>
@@ -45,4 +45,25 @@
       </div>
     </div>
   </form>
+  @if(session('success'))
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
+      });
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot>
   
-  <form action="" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('meninggal.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
@@ -21,33 +21,51 @@
             </div>
           </div>
           <div class="col-span-full">
-            <label for="keperluan" class="block text-sm font-medium leading-6 text-gray-900">Tanggal Meninggal</label>
+            <label for="tgl" class="block text-sm font-medium leading-6 text-gray-900">Tanggal Meninggal</label>
             <div class="mt-2">
-              <input type="date" name="keperluan" id="keperluan" autocomplete="off" class="block w-1/6 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="date" name="tgl" id="tgl" autocomplete="off" class="block w-1/6 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full mt-6">
-            <label for="no" class="block text-sm font-medium leading-6 text-gray-900">Di</label>
+            <label for="di" class="block text-sm font-medium leading-6 text-gray-900">Di</label>
             <div class="mt-2">
-              <input type="text" name="no" id="no" placeholder="Di Rumah, Di Rumah Sakit" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="di" id="di" placeholder="Di Rumah, Di Rumah Sakit" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full mt-6">
-            <label for="no" class="block text-sm font-medium leading-6 text-gray-900">Penyebab Meninggal</label>
+            <label for="penyebab" class="block text-sm font-medium leading-6 text-gray-900">Penyebab Meninggal</label>
             <div class="mt-2">
-              <input type="text" name="no" id="no" autocomplete="off" placeholder="Sakit, Kecelakaan, dll" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="penyebab" id="penyebab" autocomplete="off" placeholder="Sakit, Kecelakaan, dll" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full mt-6">
-            <label for="no" class="block text-sm font-medium leading-6 text-gray-900">Keperluan</label>
+            <label for="keperluan" class="block text-sm font-medium leading-6 text-gray-900">Keperluan</label>
             <div class="mt-2">
-              <input type="text" placeholder="Keperluan" name="no" id="no" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" placeholder="Keperluan" name="keperluan" id="keperluan" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full mt-6">
             <label for="no" class="block text-sm font-medium leading-6 text-gray-900">No yang bisa dihubungi</label>
             <div class="mt-2">
               <input type="number" name="no" id="no" autocomplete="off" placeholder="Masukkan Nomor" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div class="col-span-full">
+            <label for="suket" class="block text-sm font-medium leading-6 text-gray-900">Scan Surat Keterangan Kematian (Dari RS)</label>
+            <div class="mt-2">
+              <input type="file" name="suket" id="suket" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div class="col-span-full">
+            <label for="saksi1" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 1</label>
+            <div class="mt-2">
+              <input type="file" name="saksi1" id="saksi1" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div class="col-span-full">
+            <label for="saksi2" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 2</label>
+            <div class="mt-2">
+              <input type="file" name="saksi2" id="saksi2" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           
@@ -64,4 +82,26 @@
       </div>
     </div>
   </form>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: '{{ session('success') }}',
+          timer: 3000,
+          showConfirmButton: false
+      });
+  </script>
+@endif
+
+@if(session('error'))
+  <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '{{ session('error') }}',
+      });
+  </script>
+@endif
 </x-layout>

@@ -18,7 +18,7 @@
     </a>
     <div class="group w-full rounded-lg bg-[rgb(41,49,79)] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_rgb(244,67,54)]" >
       <p class="text-white text-2xl" id="totalSurat"></p>
-      <p class="text-white text-sm">Surat Selesai</p>
+      <p class="text-white text-sm">Total Surat</p>
       <svg
         class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
         xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@
         <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
       </svg>
     </div>
-    <a href="/admin/artikel/daftar" class="group w-full rounded-lg bg-[#fc6602] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#fc1b02]" >
+    <a href="{{ route('article.list.diajukan') }}" class="group w-full rounded-lg bg-[#fc6602] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#fc1b02]" >
       <p class="text-white text-2xl" id="submittedCount"></p>
       <p class="text-white text-sm">Artikel Diajukan</p>
       <svg
@@ -62,7 +62,36 @@
     </svg>
   </a>
 
-  </div>
+</div>
+<div class="w-4/5 mx-auto mt-10">
+  <h1 class="text-center text-2xl font-bold mb-6">Data Surat Masuk 7 Hari Terakhir</h1>
+  <canvas id="barChart"></canvas>
+</div>
+
+<script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: @json($chartData['labels']),
+          datasets: [{
+              label: 'Surat Masuk',
+              data: @json($chartData['data']),
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+
 
   <script>
     // Panggil fungsi untuk mendapatkan jumlah artikel yang diajukan dan diterima

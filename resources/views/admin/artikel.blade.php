@@ -3,7 +3,12 @@
 
 
   
- 
+  <div class="mt-6 flex items-center gap-x-4 mb-9">
+    <button onclick="window.location='{{ route('admin.article')}}'" class="rounded-md bg-gray-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500">Semua</button>
+    <button onclick="window.location='{{ route('article.list.diajukan') }}'" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Diajukan</button>
+    <button onclick="window.location='{{ route('article.list.ditolak')}}'" class="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">Ditolak</button>
+    <button onclick="window.location='{{ route('article.list.diterima')}}'" class="rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500">Dipublish</button>
+  </div>
 <div class="relative overflow-x-auto">
   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-6">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -61,8 +66,8 @@
               $bgColor = 'bg-green-500 text-white px-2 py-1 rounded';
           } elseif ($status === 'ditolak') {
               $bgColor = 'bg-red-500 text-white px-2 py-1 rounded';
-          } elseif ($status === 'diproses') {
-              $bgColor = 'bg-blue-500 text-black px-2 py-1 rounded';
+          } elseif ($status === 'diajukan') {
+              $bgColor = 'bg-blue-500 text-white px-2 py-1 rounded';
           }
       @endphp
       
