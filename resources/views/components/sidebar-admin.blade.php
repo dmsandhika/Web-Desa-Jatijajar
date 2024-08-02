@@ -5,7 +5,7 @@
         </div>
         <nav class="text-white text-base font-semibold pt-3">
             <x-side-link href="/admin" :active="request()->is('admin')">
-                <i class="fas fa-tachometer-alt mr-3"></i> Admin
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
             </x-side-link>
             <x-side-link href="/admin/surat" :active="request()->is('admin/surat')">
                 <i class="fas fa-sticky-note mr-3"></i> Surat

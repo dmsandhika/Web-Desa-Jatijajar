@@ -1,7 +1,7 @@
 <x-layout-admin>
   <x-slot:title>{{ $title }}</x-slot>
-
-  <form id="belumnikahForm" action="{{ route('surat.belumnikah.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+  
+  <form id="sktmForm" action="{{ route('surat.sktm.update', $data->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="space-y-12">
@@ -10,36 +10,25 @@
           <div class="col-span-full">
             <label for="nik" class="block text-sm font-medium leading-6 text-gray-900">NIK</label>
             <div class="mt-2">
-              <input type="text" placeholder="NIK Pemohon" name="nik" id="nik" autocomplete="off" value="{{ $data->nik }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="nik" id="nik" value="{{ $data->nik }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
 
           <div class="col-span-full">
             <label for="nama" class="block text-sm font-medium leading-6 text-gray-900">Nama</label>
             <div class="mt-2">
-              <input type="text" name="nama" id="nama" placeholder="Nama Lengkap Pemohon" autocomplete="off" value="{{ $data->nama }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="nama" id="nama" value="{{ $data->nama }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
 
           <div class="col-span-full">
             <label for="keperluan" class="block text-sm font-medium leading-6 text-gray-900">Keperluan</label>
             <div class="mt-2">
-              <input type="text" name="keperluan" id="keperluan" value="{{ $data->keperluan }}" readonly placeholder="Keperluan" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input type="text" name="keperluan" id="keperluan" value="{{ $data->keperluan }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
-          
+
           <div class="col-span-full">
-            <label for="ktp" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KTP</label>
-            <div class="mt-2">
-                @if (pathinfo($data->ktp, PATHINFO_EXTENSION) == 'pdf')
-                    <a href="{{ asset($data->ktp) }}" download class="bg-blue-500 text-white px-3 py-2 rounded">Download PDF</a>
-                @else
-                    <img src="{{ asset($data->ktp) }}" alt="Foto KTP" class="h-40 w-auto object-cover cursor-pointer" onclick="openFullScreen('{{ asset($data->ktp) }}')">
-                @endif
-            </div>
-        </div>
-        
-        <div class="col-span-full">
             <label for="kk" class="block text-sm font-medium leading-6 text-gray-900">Foto Scan KK</label>
             <div class="mt-2">
                 @if (pathinfo($data->kk, PATHINFO_EXTENSION) == 'pdf')
@@ -49,14 +38,12 @@
                 @endif
             </div>
         </div>
-        
-          </div>
         </div>
 
         <div class="col-span-full mt-6">
           <label for="no" class="block text-sm font-medium leading-6 text-gray-900">No yang bisa dihubungi</label>
           <div class="mt-2">
-            <input type="number" placeholder="Masukkan Nomor" name="no" id="no" value="{{ $data->no }}" readonly autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input type="number" name="no" id="no" value="{{ $data->no }}" readonly class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
@@ -77,7 +64,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="mt-6 flex items-center justify-end gap-x-6">
         <a href="{{ route('admin.surat')}}" class="inline-block">
           <button type="button" class="text-sm font-semibold leading-6 text-gray-900 border border-transparent p-2 rounded hover:border-gray-500">
@@ -92,7 +79,6 @@
     </div>
   </form>
 
-  {{-- modal gambar --}}
   <div id="fullScreenModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75 z-50 overflow-auto hidden">
     <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
         <div class="relative p-4 bg-white shadow-lg rounded-lg max-w-screen-lg w-full">
@@ -105,10 +91,9 @@
         </div>
     </div>
   </div>
-
   <script>
     function submitForm(status) {
-        const form = document.getElementById('belumnikahForm');
+        const form = document.getElementById('sktmForm');
         const statusInput = document.createElement('input');
         statusInput.type = 'hidden';
         statusInput.name = 'status';
@@ -136,6 +121,4 @@
         @endif
     });
   </script>
- 
-
 </x-layout-admin>

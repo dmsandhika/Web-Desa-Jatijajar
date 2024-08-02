@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Surat;
 
 use Illuminate\Http\Request;
-use App\Models\Surat\KuasaForm;
+use App\Models\Surat\KiaForm;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
-class KuasaFormController extends Controller
+class KIAFormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +23,8 @@ class KuasaFormController extends Controller
      */
     public function create()
     {
-        $title='Form Surat Kuasa';
-        return view('surat.form.kuasa',compact('title'));
+        $title='Form Kartu Identitas Anak';
+        return view('surat.form.kia',compact('title'));
     }
 
     /**
@@ -33,41 +33,47 @@ class KuasaFormController extends Controller
     public function store(Request $request){
         try {
             $request->validate([
-                'nik' => 'required|numeric',
+                'nik' => 'required|string|max:16',
                 'nama' => 'required|string|max:255',
-                'ktp_pemberi' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
-                'isi_kuasa' => 'required|string',
+                'anak' => 'required|string|max:255',
+                'akta' => 'required|file|mimes:jpg,jpeg,png,pdf',
+                'kk' => 'required|file|mimes:jpg,jpeg,png,pdf',
+                'foto' => 'required|file|mimes:jpg,jpeg,png',
                 'no' => 'required|string|max:15',
-                'ktp_penerima' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
-                'hubungan' => 'required|string|max:255'
             ]);
 
             $timestamp = now()->format('YmdHis');
 
 
-            $ktp_pemberi = $request->file('ktp_pemberi');
-            $ktpPemberiName = $timestamp . '_' . $ktp_pemberi->getClientOriginalName();
-            $ktpPemberiPath = 'ktp/' . $ktpPemberiName;
-            $ktp_pemberi->move(public_path('ktp'), $ktpPemberiName);
+            $akta = $request->file('akta');
+            $aktaName = $timestamp . '_' . $akta->getClientOriginalName();
+            $aktaPath = 'akta/' . $aktaName;
+            $akta->move(public_path('akta'), $aktaName);
             
-            $ktp_penerima = $request->file('ktp_penerima');
-            $ktpPenerimaName = $timestamp . '_' . $ktp_penerima->getClientOriginalName();
-            $ktpPenerimaPath = 'ktp/' . $ktpPenerimaName;
-            $ktp_penerima->move(public_path('ktp'), $ktpPenerimaName);
+            $kk = $request->file('kk');
+            $kkName = $timestamp . '_' . $kk->getClientOriginalName();
+            $kkPath = 'kk/' . $kkName;
+            $kk->move(public_path('kk'), $kkName);
+            
+            $foto = $request->file('foto');
+            $fotoName = $timestamp . '_' . $foto->getClientOriginalName();
+            $fotoPath = 'foto/' . $fotoName;
+            $foto->move(public_path('foto'), $fotoName);
+            
 
-            KuasaForm::create([
+            KiaForm::create([
                 'nik' => $request->input('nik'),
                 'nama' => $request->input('nama'),
-                'ktp_pemberi' => $ktpPemberiPath,
-                'isi_kuasa' => $request->input('isi_kuasa'),
-                'ktp_penerima' => $ktpPenerimaPath,
+                'anak' => $request->input('anak'),
+                'akta' => $aktaPath,
+                'kk' => $kkPath,
+                'foto' => $fotoPath,
                 'no' => $request->input('no'),
-                'hubungan' => $request->input('hubungan'),
             ]);
 
-            return redirect()->route('kuasa.create')->with('success', 'Formulir berhasil diajukan.');
+            return redirect()->route('kia.create')->with('success', 'Formulir berhasil diajukan.');
         } catch (\Exception $e) {
-            return redirect()->route('kuasa.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->route('kia.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     } 
 
@@ -84,11 +90,11 @@ class KuasaFormController extends Controller
      */
     public function edit(string $id)
     {
-        $data = KuasaForm::find($id);
+        $data = KiaForm::find($id);
         $title = 'Detail Surat';
         
         
-        return view('surat.submit.kuasa', compact('data', 'title'));
+        return view('surat.submit.kia', compact('data', 'title'));
     }
 
     /**
@@ -97,12 +103,12 @@ class KuasaFormController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
             'note' => 'nullable|string',
             'status' => 'required|in:diajukan,selesai,ditolak'
         ]);
     
-        $data = KuasaForm::find($id);
+        $data = KiaForm::find($id);
     
         $data->note = $request->note;
         $data->status = $request->status;
@@ -139,17 +145,21 @@ class KuasaFormController extends Controller
     {
         try {
             // Temukan data berdasarkan ID
-            $form = KuasaForm::findOrFail($id);
+            $form = KiaForm::findOrFail($id);
 
             
 
-            $ktp_pemberi = public_path($form->ktp_pemberi);
-            if (File::exists($ktp_pemberi)) {
-                File::delete($ktp_pemberi);
+            $akta = public_path($form->akta);
+            if (File::exists($akta)) {
+                File::delete($akta);
             }
-            $ktp_penerima = public_path($form->ktp_penerima);
-            if (File::exists($ktp_penerima)) {
-                File::delete($ktp_penerima);
+            $kk = public_path($form->kk);
+            if (File::exists($kk)) {
+                File::delete($kk);
+            }
+            $foto = public_path($form->foto);
+            if (File::exists($foto)) {
+                File::delete($foto);
             }
             $file = public_path($form->file);
             if (File::exists($file)) {

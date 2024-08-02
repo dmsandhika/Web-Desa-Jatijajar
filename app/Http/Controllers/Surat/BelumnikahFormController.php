@@ -43,16 +43,20 @@ class BelumnikahFormController extends Controller
         ]);
 
         try{
+            $timestamp = now()->format('YmdHis');
+
+            $ktp = $request->file('ktp');
+            $ktpName = $timestamp . '_' . $ktp->getClientOriginalName();
+            $ktpPath = 'ktp/' . $ktpName;
+            $ktp->move(public_path('ktp'), $ktpName);
             
             // Menangani file KTP
-            $ktp = $request->file('ktp');
-            $ktpPath = 'ktp/' . $ktp->getClientOriginalName();
-            $ktp->move(public_path('ktp'), $ktp->getClientOriginalName());
     
             // Menangani file KK
             $kk = $request->file('kk');
-            $kkPath = 'kk/' . $kk->getClientOriginalName();
-            $kk->move(public_path('kk'), $kk->getClientOriginalName());
+            $kkName = $timestamp . '_' . $kk->getClientOriginalName();
+            $kkPath = 'kk/' .$kkName;
+            $kk->move(public_path('kk'), $kkName);
     
             // Simpan data formulir ke dalam basis data
             BelumnikahForm::create([
@@ -122,8 +126,12 @@ class BelumnikahFormController extends Controller
 
         // Simpan file baru
         $file = $request->file('file');
-        $filePath = 'file/' . $file->getClientOriginalName();
-        $file->move(public_path('file'), $file->getClientOriginalName());
+        $timestamp = time();
+        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileExtension = $file->getClientOriginalExtension();
+        $newFileName = $fileName . '_' . $timestamp . '.' . $fileExtension;
+        $filePath = 'file/' . $newFileName;
+        $file->move(public_path('file'), $newFileName);
         $data->file = $filePath;
     }
 

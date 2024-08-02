@@ -57,11 +57,11 @@
     ],
     [
         'title' => 'KIA (Kartu Identitas Anak)',
-        'href' => '#',
+        'href' => route('kia.create'),
     ],
     [
         'title' => 'Surat Pengantar Nikah',
-        'href' => '#',
+        'href' => route('nikah.create'),
     ],
 ];
  

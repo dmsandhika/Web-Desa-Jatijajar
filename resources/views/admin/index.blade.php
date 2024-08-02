@@ -1,7 +1,7 @@
 <x-layout-admin>
   <x-slot:title>{{ $title }}</x-slot>
   <div class="grid grid-cols-2 w-[1050px] gap-2 max-[750px]:grid-cols-1 px-3 mt-6">
-    <a href="/admin/surat" class="group w-full rounded-lg bg-[#673ab7] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#2196f3]" >
+    <a href="{{ route('admin.surat.diajukan') }}" class="group w-full rounded-lg bg-[#673ab7] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#2196f3]" >
       <p class="text-white text-2xl" id="totalSuratDiajukan"></p>
       <p class="text-white text-sm">Surat Diajukan</p>
       <svg
@@ -16,9 +16,11 @@
         <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
       </svg>
     </a>
-    <div class="group w-full rounded-lg bg-[rgb(41,49,79)] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_rgb(244,67,54)]" >
-      <p class="text-white text-2xl" id="totalSurat"></p>
-      <p class="text-white text-sm">Total Surat</p>
+    <a href="{{ route('admin.surat')}}">
+
+      <div class="group w-full rounded-lg bg-[rgb(41,49,79)] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_rgb(244,67,54)]" >
+        <p class="text-white text-2xl" id="totalSurat"></p>
+        <p class="text-white text-sm">Total Surat</p>
       <svg
         class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
         xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +29,11 @@
         width="36"
         fill="#ffffff"
       >
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-      </svg>
-    </div>
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+    </svg>
+  </div>
+</a>
     <a href="{{ route('article.list.diajukan') }}" class="group w-full rounded-lg bg-[#fc6602] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#fc1b02]" >
       <p class="text-white text-2xl" id="submittedCount"></p>
       <p class="text-white text-sm">Artikel Diajukan</p>
