@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     
-    public function index(){
+    public function index()
+    {
         return view('login.index');
     }
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $credentials = $request->validate([
             'name' => ['required'],
             'password' => ['required'],
@@ -25,7 +27,8 @@ class LoginController extends Controller
  
         return back()->with('loginError', 'Login Failed!');
     }
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
  
         $request->session()->invalidate();

@@ -24,13 +24,14 @@ class NikahFormController extends Controller
     public function create()
     {
         $title='Form Surat Pengantar Nikah';
-        return view('surat.form.nikah',compact('title'));
+        return view('surat.form.nikah', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:16',
@@ -106,7 +107,7 @@ class NikahFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('nikah.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }  
+    }
 
     /**
      * Display the specified resource.
@@ -224,6 +225,6 @@ class NikahFormController extends Controller
 
             // Redirect dengan pesan error menggunakan SweetAlert2
             return redirect()->route('admin.surat')->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
-}
 }

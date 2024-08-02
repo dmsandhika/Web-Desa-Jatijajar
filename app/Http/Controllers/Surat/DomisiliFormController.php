@@ -24,52 +24,52 @@ class DomisiliFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Domisili';
-        return view('surat.form.domisili',compact('title'));
+        return view('surat.form.domisili', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    try {
-        $request->validate([
-            'nik' => 'required|string',
-            'nama' => 'required|string',
-            'tempatlahir' => 'required|string',
-            'tgl' => 'required|date',
-            'kelamin' => 'required|string',
-            'agama' => 'required|string',
-            'pekerjaan' => 'required|string',
-            'alamat' => 'required|string',
-            'keperluan' => 'required|string',
-            'ktp' => 'required|file|mimes:jpg,png,pdf|max:2048',
-            'no' => 'required|numeric',
-        ]);
+    {
+        try {
+            $request->validate([
+                'nik' => 'required|string',
+                'nama' => 'required|string',
+                'tempatlahir' => 'required|string',
+                'tgl' => 'required|date',
+                'kelamin' => 'required|string',
+                'agama' => 'required|string',
+                'pekerjaan' => 'required|string',
+                'alamat' => 'required|string',
+                'keperluan' => 'required|string',
+                'ktp' => 'required|file|mimes:jpg,png,pdf|max:2048',
+                'no' => 'required|numeric',
+            ]);
 
-        $ktp = $request->file('ktp');
-        $ktpPath = 'ktp/' . $ktp->getClientOriginalName();
-        $ktp->move(public_path('ktp'), $ktp->getClientOriginalName());
+            $ktp = $request->file('ktp');
+            $ktpPath = 'ktp/' . $ktp->getClientOriginalName();
+            $ktp->move(public_path('ktp'), $ktp->getClientOriginalName());
 
-        DomisiliForm::create([
-            'nik' => $request->input('nik'),
-            'nama' => $request->input('nama'),
-            'tempatlahir' => $request->input('tempatlahir'),
-            'tgl' => $request->input('tgl'),
-            'kelamin' => $request->input('kelamin'),
-            'agama' => $request->input('agama'),
-            'pekerjaan' => $request->input('pekerjaan'),
-            'keperluan' => $request->input('keperluan'),
-            'alamat' => $request->input('alamat'),
-            'no' => $request->input('no'),
-            'ktp' => $ktpPath
-        ]);
+            DomisiliForm::create([
+                'nik' => $request->input('nik'),
+                'nama' => $request->input('nama'),
+                'tempatlahir' => $request->input('tempatlahir'),
+                'tgl' => $request->input('tgl'),
+                'kelamin' => $request->input('kelamin'),
+                'agama' => $request->input('agama'),
+                'pekerjaan' => $request->input('pekerjaan'),
+                'keperluan' => $request->input('keperluan'),
+                'alamat' => $request->input('alamat'),
+                'no' => $request->input('no'),
+                'ktp' => $ktpPath
+            ]);
 
-        return redirect()->route('domisili.create')->with('success', 'Formulir berhasil diajukan.');
-    } catch (\Exception $e) {
-        return redirect()->route('domisili.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->route('domisili.create')->with('success', 'Formulir berhasil diajukan.');
+        } catch (\Exception $e) {
+            return redirect()->route('domisili.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-}
 
 
     /**

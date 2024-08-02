@@ -24,13 +24,14 @@ class MeninggalFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Meninggal';
-        return view('surat.form.meninggal',compact('title'));
+        return view('surat.form.meninggal', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:16',
@@ -79,7 +80,7 @@ class MeninggalFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('meninggal.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }   
+    }
 
     /**
      * Display the specified resource.

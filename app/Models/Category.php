@@ -13,7 +13,8 @@ class Category extends Model
 
     protected $fillable=['name', 'slug'];
     
-    public function articles(): HasMany{
+    public function articles(): HasMany
+    {
         return $this->hasMany(Article::class);
     }
     public static function createSlug($name)

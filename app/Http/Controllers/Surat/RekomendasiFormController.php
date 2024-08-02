@@ -24,13 +24,14 @@ class RekomendasiFormController extends Controller
     public function create()
     {
         $title='Form Surat Rekomendasi';
-        return view('surat.form.rekomendasi',compact('title'));
+        return view('surat.form.rekomendasi', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -62,7 +63,7 @@ class RekomendasiFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('rekomendasi.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    } 
+    }
 
     /**
      * Display the specified resource.

@@ -31,7 +31,8 @@ class LahirFormController extends Controller
      * Store a newly created resource in storage.
      */
  
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string',
@@ -90,7 +91,7 @@ class LahirFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('lahir.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }   
+    }
 
 
 

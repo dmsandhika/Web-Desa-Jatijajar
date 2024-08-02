@@ -47,7 +47,7 @@ class BannerController extends Controller
         $banner = Banner::find(1);
         $title = 'Detail Banner';
 
-        return view ('struktur.banner', compact('banner', 'title'));
+        return view('struktur.banner', compact('banner', 'title'));
     }
 
     /**

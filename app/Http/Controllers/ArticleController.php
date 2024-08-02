@@ -14,28 +14,28 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    // Ambil kata kunci pencarian dari request
-    $search = $request->input('search');
+    {
+        // Ambil kata kunci pencarian dari request
+        $search = $request->input('search');
 
-    // Query untuk mendapatkan artikel
-    $query = Article::where('status', 'diterima');
+        // Query untuk mendapatkan artikel
+        $query = Article::where('status', 'diterima');
 
-    // Jika ada kata kunci pencarian, tambahkan kondisi pencarian ke query
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('title', 'LIKE', "%{$search}%")
-              ->orWhere('content', 'LIKE', "%{$search}%");
-        });
+        // Jika ada kata kunci pencarian, tambahkan kondisi pencarian ke query
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('content', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Ambil artikel yang sudah difilter dan diurutkan berdasarkan tanggal pembuatan
+        $articles = $query->orderBy('created_at', 'desc')->get();
+
+        $hasArticles = $articles->isNotEmpty();
+        // Kembalikan view dengan artikel yang sesuai
+        return view('articles.article', ['title' => 'Galeri Kegiatan', 'articles' => $articles, 'hasArticles' => $hasArticles]);
     }
-
-    // Ambil artikel yang sudah difilter dan diurutkan berdasarkan tanggal pembuatan
-    $articles = $query->orderBy('created_at', 'desc')->get();
-
-    $hasArticles = $articles->isNotEmpty();
-    // Kembalikan view dengan artikel yang sesuai
-    return view('articles.article', ['title' => 'Galeri Kegiatan', 'articles' => $articles, 'hasArticles' => $hasArticles]);
-}
 
 
     public function latestArticles()
@@ -61,7 +61,7 @@ class ArticleController extends Controller
         ]);
     
         $slug = Str::slug($request->title, '-');
-        try {    
+        try {
             $article = new Article();
             $article->title = $request->title;
             $article->category_id = $request->category;
@@ -180,38 +180,42 @@ class ArticleController extends Controller
 
 
     public function countArticles()
-{
-    $submittedArticlesCount = Article::count();
-    $acceptedArticlesCount = Article::where('status', 'diterima')->count();
+    {
+        $submittedArticlesCount = Article::count();
+        $acceptedArticlesCount = Article::where('status', 'diterima')->count();
 
-    return response()->json([
-        'submittedArticlesCount' => $submittedArticlesCount,
-        'acceptedArticlesCount' => $acceptedArticlesCount
-    ]);
-}
-public function all(){
-    $blog = Article::all();
-    $title = 'Artikel Kegiatan Desa';
+        return response()->json([
+            'submittedArticlesCount' => $submittedArticlesCount,
+            'acceptedArticlesCount' => $acceptedArticlesCount
+        ]);
+    }
+    public function all()
+    {
+        $blog = Article::all();
+        $title = 'Artikel Kegiatan Desa';
 
-    return view('admin.artikel', compact('blog', 'title'));
-}
-public function diajukan(){
-    $blog = Article::where('status', 'diajukan')->get();
-    $title = 'Artikel Kegiatan Desa';
+        return view('admin.artikel', compact('blog', 'title'));
+    }
+    public function diajukan()
+    {
+        $blog = Article::where('status', 'diajukan')->get();
+        $title = 'Artikel Kegiatan Desa';
 
-    return view('admin.artikel', compact('blog', 'title'));
-}
-public function ditolak(){
-    $blog = Article::where('status', 'ditolak')->get();
-    $title = 'Artikel Kegiatan Desa';
+        return view('admin.artikel', compact('blog', 'title'));
+    }
+    public function ditolak()
+    {
+        $blog = Article::where('status', 'ditolak')->get();
+        $title = 'Artikel Kegiatan Desa';
 
-    return view('admin.artikel', compact('blog', 'title'));
-}
-public function diterima(){
-    $blog = Article::where('status', 'diterima')->get();
-    $title = 'Artikel Kegiatan Desa';
+        return view('admin.artikel', compact('blog', 'title'));
+    }
+    public function diterima()
+    {
+        $blog = Article::where('status', 'diterima')->get();
+        $title = 'Artikel Kegiatan Desa';
 
-    return view('admin.artikel', compact('blog', 'title'));
-}
-    
+        return view('admin.artikel', compact('blog', 'title'));
+    }
+
 }

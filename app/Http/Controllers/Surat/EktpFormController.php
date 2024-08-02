@@ -24,13 +24,14 @@ class EktpFormController extends Controller
     public function create()
     {
         $title='Form Surat Pengantar E-KTP';
-        return view('surat.form.ektp',compact('title'));
+        return view('surat.form.ektp', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:255',
@@ -58,7 +59,7 @@ class EktpFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('ektp.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    } 
+    }
 
     /**
      * Display the specified resource.

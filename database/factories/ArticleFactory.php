@@ -23,7 +23,7 @@ class ArticleFactory extends Factory
             'author'=>fake()->name(),
             'content'=>fake()->paragraph(10),
             'slug'=> Str::slug(fake()->sentence()),
-            'image'=>fake()->imageUrl(640,480),
+            'image'=>fake()->imageUrl(640, 480),
             'category_id'=>Category::factory(),
         ];
     }

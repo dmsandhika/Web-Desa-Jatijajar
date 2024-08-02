@@ -13,7 +13,8 @@ class BannerSeeder extends Seeder
      */
     public function run(): void
     {
-        Banner::create([
+        Banner::create(
+            [
             'gambar' => 'banner/struktur.jpg',
             'created_at' => now(),
             'updated_at' => now()

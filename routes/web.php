@@ -37,10 +37,10 @@ Route::get('/struktur', function () {
     return view('struktur', ['title'=>'Struktur Organisasi Desa', 'struktur'=>Struktur::all(), 'bnr'=>Banner::findOrFail(1)]);
 });
 Route::get('/article', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/article/succes', function(){
+Route::get('/article/succes', function () {
     return view('articles.success');
 })->name('articles.success');
-Route::get('/article/{article:slug}', function(Article $article){
+Route::get('/article/{article:slug}', function (Article $article) {
     return view('articles.single-article', ['title'=>'Single Post', 'article'=>$article]);
 });
 
@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/artikel/daftar/ditolak', [ArticleController::class, 'ditolak'])->name('article.list.ditolak');
     Route::get('/admin/artikel/daftar/daftar', [ArticleController::class, 'diterima'])->name('article.list.diterima');
     Route::get('/admin/artikel/kategori', function () {
-    return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
+        return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
     })->name('kategori.list');
     Route::post('/admin/artikel/kategori', [CategoryController::class, 'store'])->name('kategori.store');
     Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
@@ -160,5 +160,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'edit'])->name('surat.usaha.detail');
     Route::delete('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'destroy'])->name('surat.usaha.delete');
     Route::put('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'update'])->name('surat.usaha.update');
-        
+
 });

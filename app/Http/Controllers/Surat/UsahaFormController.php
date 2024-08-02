@@ -24,13 +24,14 @@ class UsahaFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Usaha';
-        return view('surat.form.usaha',compact('title'));
+        return view('surat.form.usaha', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:16',
@@ -66,7 +67,7 @@ class UsahaFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('usaha.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }   
+    }
 
     /**
      * Display the specified resource.
@@ -135,10 +136,9 @@ class UsahaFormController extends Controller
     public function destroy(string $id)
     {
         try {
-            // Temukan data berdasarkan ID
+        
             $form = UsahaForm::findOrFail($id);
-
-            // Hapus file KTP
+        
             $ktpPath = public_path($form->ktp);
             if (File::exists($ktpPath)) {
                 File::delete($ktpPath);
@@ -149,7 +149,6 @@ class UsahaFormController extends Controller
                 File::delete($file);
             }
 
-            // Hapus data dari database
             $form->delete();
 
             // Redirect dengan pesan sukses menggunakan SweetAlert2

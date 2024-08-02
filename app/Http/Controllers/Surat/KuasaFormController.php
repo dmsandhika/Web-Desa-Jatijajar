@@ -24,13 +24,14 @@ class KuasaFormController extends Controller
     public function create()
     {
         $title='Form Surat Kuasa';
-        return view('surat.form.kuasa',compact('title'));
+        return view('surat.form.kuasa', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -69,7 +70,7 @@ class KuasaFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('kuasa.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    } 
+    }
 
     /**
      * Display the specified resource.

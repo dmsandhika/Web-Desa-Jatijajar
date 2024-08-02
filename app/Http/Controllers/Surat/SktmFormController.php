@@ -24,13 +24,14 @@ class SktmFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Tidak Mampu';
-        return view('surat.form.keramaian',compact('title'));
+        return view('surat.form.keramaian', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:16',
@@ -60,7 +61,7 @@ class SktmFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('sktm.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }   
+    }
 
     /**
      * Display the specified resource.

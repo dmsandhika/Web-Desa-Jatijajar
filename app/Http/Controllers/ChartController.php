@@ -52,11 +52,11 @@ class ChartController extends Controller
 
     
         // Extract dates and counts
-        $recentDates = array_map(function($item) {
+        $recentDates = array_map(function ($item) {
             return $item->date;
         }, $recentDatesData);
     
-        $data = array_map(function($item) {
+        $data = array_map(function ($item) {
             return $item->count;
         }, $recentDatesData);
     

@@ -20,5 +20,5 @@ class KehilanganForm extends Model
         'file',
         'status',
     ];
-    
+
 }

@@ -24,13 +24,14 @@ class KIAFormController extends Controller
     public function create()
     {
         $title='Form Kartu Identitas Anak';
-        return view('surat.form.kia',compact('title'));
+        return view('surat.form.kia', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:16',
@@ -75,7 +76,7 @@ class KIAFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('kia.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    } 
+    }
 
     /**
      * Display the specified resource.

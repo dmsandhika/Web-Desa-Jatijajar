@@ -18,5 +18,5 @@ class EktpForm extends Model
         'file',
         'status',
     ];
-    
+
 }

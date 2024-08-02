@@ -22,7 +22,8 @@ use App\Models\Surat\RekomendasiForm;
 
 class DataSuratController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $belumNikah = BelumnikahForm::select(
             'id',
             'nik',
@@ -231,7 +232,8 @@ class DataSuratController extends Controller
     }
     
     
-    public function diajukan(){
+    public function diajukan()
+    {
         $belumNikah = BelumnikahForm::select(
             'id',
             'nik',
@@ -438,7 +440,8 @@ class DataSuratController extends Controller
     
         return view('admin.surat', compact('data', 'title'));
     }
-    public function ditolak(){
+    public function ditolak()
+    {
         $belumNikah = BelumnikahForm::select(
             'id',
             'nik',
@@ -645,7 +648,8 @@ class DataSuratController extends Controller
     
         return view('admin.surat', compact('data', 'title'));
     }
-    public function selesai(){
+    public function selesai()
+    {
         $belumNikah = BelumnikahForm::select(
             'id',
             'nik',
@@ -853,7 +857,8 @@ class DataSuratController extends Controller
         return view('admin.surat', compact('data', 'title'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
         $search = $request->input('search');
         $data = collect();
@@ -1035,7 +1040,8 @@ class DataSuratController extends Controller
 
         return view('surat.lacak', compact('data', 'title'));
     }
-    public function count() {
+    public function count()
+    {
         $domisiliDiajukan = DomisiliForm::where('status', 'diajukan')->count();
         $belumNikahDiajukan = BelumnikahForm::where('status', 'diajukan')->count();
         $lahirDiajukan = LahirForm::where('status', 'diajukan')->count();
@@ -1077,5 +1083,5 @@ class DataSuratController extends Controller
         ]);
     }
     
-    
+
 }

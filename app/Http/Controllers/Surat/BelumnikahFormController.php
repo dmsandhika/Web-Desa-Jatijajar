@@ -24,7 +24,7 @@ class BelumnikahFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Belum Nikah';
-        return view('surat.form.belumnikah',compact('title'));
+        return view('surat.form.belumnikah', compact('title'));
     }
 
     /**
@@ -42,7 +42,7 @@ class BelumnikahFormController extends Controller
             'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        try{
+        try {
             $timestamp = now()->format('YmdHis');
 
             $ktp = $request->file('ktp');
@@ -70,14 +70,13 @@ class BelumnikahFormController extends Controller
     
             // Redirect atau kembalikan respons sesuai kebutuhan
             return redirect()->route('belumnikah.create')->with('success', 'Formulir berhasil diajukan.');
-        }
-    catch (\Exception $e) {
-        // Log error
-        Log::error('Error storing belumnikah form: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            // Log error
+            Log::error('Error storing belumnikah form: ' . $e->getMessage());
 
-        // Redirect dengan pesan error menggunakan SweetAlert2
-        return redirect()->route('belumnikah.create')->with('error', 'Terjadi kesalahan saat mengajukan surat');
-    }
+            // Redirect dengan pesan error menggunakan SweetAlert2
+            return redirect()->route('belumnikah.create')->with('error', 'Terjadi kesalahan saat mengajukan surat');
+        }
     }
 
     /**
@@ -104,43 +103,43 @@ class BelumnikahFormController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    // Validasi data yang diterima dari formulir
-    $request->validate([
-        'file' => 'nullable|file|mimes:pdf|max:5120',
-        'note' => 'nullable|string',
-        'status' => 'required|in:diajukan,selesai,ditolak'
-    ]);
+    {
+        // Validasi data yang diterima dari formulir
+        $request->validate([
+            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'note' => 'nullable|string',
+            'status' => 'required|in:diajukan,selesai,ditolak'
+        ]);
 
-    $data = BelumnikahForm::find($id);
+        $data = BelumnikahForm::find($id);
 
-    $data->note = $request->note;
-    $data->status = $request->status;
+        $data->note = $request->note;
+        $data->status = $request->status;
         
     
-    if ($request->hasFile('file')) {
-        // Hapus file lama jika ada
-        if ($data->file && file_exists(public_path($data->file))) {
-            unlink(public_path($data->file));
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($data->file && file_exists(public_path($data->file))) {
+                unlink(public_path($data->file));
+            }
+
+            // Simpan file baru
+            $file = $request->file('file');
+            $timestamp = time();
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileExtension = $file->getClientOriginalExtension();
+            $newFileName = $fileName . '_' . $timestamp . '.' . $fileExtension;
+            $filePath = 'file/' . $newFileName;
+            $file->move(public_path('file'), $newFileName);
+            $data->file = $filePath;
         }
 
-        // Simpan file baru
-        $file = $request->file('file');
-        $timestamp = time();
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = $fileName . '_' . $timestamp . '.' . $fileExtension;
-        $filePath = 'file/' . $newFileName;
-        $file->move(public_path('file'), $newFileName);
-        $data->file = $filePath;
-    }
-
-    // Simpan data formulir ke dalam basis data
-    $data->save();
+        // Simpan data formulir ke dalam basis data
+        $data->save();
     
-    // Redirect atau kembalikan respons sesuai kebutuhan
-    return redirect()->route('admin.surat')->with('success', 'Surat Berhasil Ditindaklanjuti');
-}
+        // Redirect atau kembalikan respons sesuai kebutuhan
+        return redirect()->route('admin.surat')->with('success', 'Surat Berhasil Ditindaklanjuti');
+    }
 
 
     /**

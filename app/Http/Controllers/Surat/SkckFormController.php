@@ -24,13 +24,14 @@ class SkckFormController extends Controller
     public function create()
     {
         $title='Form Surat Pengantar SKCK';
-        return view('surat.form.skck',compact('title'));
+        return view('surat.form.skck', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|string|max:255',
@@ -58,7 +59,7 @@ class SkckFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('skck.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    } 
+    }
 
     /**
      * Display the specified resource.
@@ -141,16 +142,12 @@ class SkckFormController extends Controller
                 File::delete($file);
             }
 
-            // Hapus data dari database
             $form->delete();
 
-            // Redirect dengan pesan sukses menggunakan SweetAlert2
             return redirect()->route('admin.surat')->with('success', 'Data berhasil dihapus.');
         } catch (\Exception $e) {
-            // Log error
             Log::error('Error deleting domisili form: ' . $e->getMessage());
 
-            // Redirect dengan pesan error menggunakan SweetAlert2
             return redirect()->route('admin.surat')->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
     }

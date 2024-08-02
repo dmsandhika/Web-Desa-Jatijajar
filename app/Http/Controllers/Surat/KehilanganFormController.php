@@ -24,13 +24,14 @@ class KehilanganFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Kehilangan';
-        return view('surat.form.kehilangan',compact('title'));
+        return view('surat.form.kehilangan', compact('title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -62,7 +63,7 @@ class KehilanganFormController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('hilang.create')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }   
+    }
 
     /**
      * Display the specified resource.
@@ -88,43 +89,43 @@ class KehilanganFormController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    // Validasi data yang diterima dari formulir
-    $request->validate([
-        'file' => 'nullable|file|mimes:pdf|max:5120',
-        'note' => 'nullable|string',
-        'status' => 'required|in:diajukan,selesai,ditolak'
-    ]);
+    {
+        // Validasi data yang diterima dari formulir
+        $request->validate([
+            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'note' => 'nullable|string',
+            'status' => 'required|in:diajukan,selesai,ditolak'
+        ]);
 
-    $data = KehilanganForm::find($id);
+        $data = KehilanganForm::find($id);
 
-    $data->note = $request->note;
-    $data->status = $request->status;
+        $data->note = $request->note;
+        $data->status = $request->status;
         
     
-    if ($request->hasFile('file')) {
-        // Hapus file lama jika ada
-        if ($data->file && file_exists(public_path($data->file))) {
-            unlink(public_path($data->file));
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($data->file && file_exists(public_path($data->file))) {
+                unlink(public_path($data->file));
+            }
+
+            // Simpan file baru
+            $file = $request->file('file');
+            $timestamp = time();
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileExtension = $file->getClientOriginalExtension();
+            $newFileName = $fileName . '_' . $timestamp . '.' . $fileExtension;
+            $filePath = 'file/' . $newFileName;
+            $file->move(public_path('file'), $newFileName);
+            $data->file = $filePath;
         }
 
-        // Simpan file baru
-        $file = $request->file('file');
-        $timestamp = time();
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = $fileName . '_' . $timestamp . '.' . $fileExtension;
-        $filePath = 'file/' . $newFileName;
-        $file->move(public_path('file'), $newFileName);
-        $data->file = $filePath;
-    }
-
-    // Simpan data formulir ke dalam basis data
-    $data->save();
+        // Simpan data formulir ke dalam basis data
+        $data->save();
     
-    // Redirect atau kembalikan respons sesuai kebutuhan
-    return redirect()->route('admin.surat')->with('success', 'Surat Berhasil Ditindaklanjuti');
-}
+        // Redirect atau kembalikan respons sesuai kebutuhan
+        return redirect()->route('admin.surat')->with('success', 'Surat Berhasil Ditindaklanjuti');
+    }
 
     /**
      * Remove the specified resource from storage.
