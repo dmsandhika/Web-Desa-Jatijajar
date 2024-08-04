@@ -4,12 +4,12 @@
     <div
         id="accordion-color"
         data-accordion="collapse"
-        data-active-classes="bg-yellow-100 dark:bg-gray-800 text-yellow-500 dark:text-white"
+        data-active-classes="bg-yellow-100 dark:bg-gray-300 text-yellow-500 dark:text-gray-800"
     >
         <h2 id="accordion-color-heading-1">
             <button
                 type="button"
-                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-700 dark:border-gray-700 dark:text-gray-400 hover:bg-yellow-100 dark:hover:bg-gray-800 gap-3"
+                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-yellow-20 hover:bg-gray-100  gap-3"
                 data-accordion-target="#accordion-color-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-color-body-1"
@@ -34,21 +34,20 @@
             </button>
         </h2>
         <div
-            id="accordion-color-body-1"
-            class="hidden"
-            aria-labelledby="accordion-color-heading-1"
-        >
-            <div
-                class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900"
-            >
-                <img src="{{ asset($bnr->gambar) }}" alt="" />
-            </div>
-        </div>
+    id="accordion-color-body-1"
+    class="hidden"
+    aria-labelledby="accordion-color-heading-1"
+>
+    <div class="p-5 border border-b-0 border-gray-200 flex justify-center">
+        <img src="{{ asset($bnr->gambar) }}" alt="" />
+    </div>
+</div>
+
         @foreach ($struktur as $str)
             <h2 id="accordion-color-heading-{{ $str->id + 1 }}">
                 <button
                     type="button"
-                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-800 dark:border-gray-700 dark:text-gray-400 hover:bg-yellow-100 dark:hover:bg-gray-800 gap-3"
+                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-yellow-20 hover:bg-gray-100  gap-3"
                     data-accordion-target="#accordion-color-body-{{ $str->id + 1 }}"
                     aria-expanded="false"
                     aria-controls="accordion-color-body-{{ $str->id + 1 }}"
@@ -87,15 +86,15 @@
                             {{ $str["jabatan"] }}
                         </h2>
                         <table
-                            class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            class="w-full text-left rtl:text-right text-gray-500 "
                         >
                             <tbody>
                                 <tr
-                                    class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700"
+                                    class="bg-gray-100 border-b "
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap dark:text-white"
+                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap "
                                     >
                                         Nama
                                     </th>
@@ -104,11 +103,11 @@
                                     </td>
                                 </tr>
                                 <tr
-                                    class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700"
+                                    class="bg-gray-100 border-b "
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap dark:text-white"
+                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap "
                                     >
                                         Jabatan
                                     </th>
@@ -118,11 +117,11 @@
                                     </td>
                                 </tr>
                                 <tr
-                                    class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700"
+                                    class="bg-gray-100 border-b "
                                 >
                                     <th
                                         scope="row"
-                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap dark:text-white"
+                                        class="px-6 py-4 w-1/4 text-gray-500 whitespace-nowrap "
                                     >
                                         NIP
                                     </th>
@@ -141,13 +140,13 @@
 
                     @if ($str["desc"])
                         <p
-                            class="mb- ml-10 pt-10 text-gray-500 dark:text-gray-400"
+                            class="mb- ml-10 pt-10 text-gray-500 "
                         >
                             {{ $str["desc"] }}
                         </p>
                     @else
                         <p
-                            class="mb- ml-10 pt-10 text-gray-400 dark:text-gray-400 italic text-center"
+                            class="mb- ml-10 pt-10 text-gray-400 italic text-center"
                         >
                             Tidak ada deskripsi
                         </p>

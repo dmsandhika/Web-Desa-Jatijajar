@@ -12,7 +12,7 @@
         />
         <meta name="author" content="Dimas Andhika" />
         <meta name="description" content="" />
-        @vite("resources/css/app.css")
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <script
             defer
@@ -86,7 +86,7 @@
                         href="https://dmsandhika.my.id"
                         class="underline"
                     >
-                        Desa Jatijajar
+                        Dimas Andhika Firmansyah
                     </a>
                     .
                 </footer>

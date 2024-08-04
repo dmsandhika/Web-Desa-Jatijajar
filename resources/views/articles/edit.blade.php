@@ -5,6 +5,7 @@
         action="{{ route("artikel.update", $art->id) }}"
         method="POST"
         enctype="multipart/form-data"
+        id="articleForm"
     >
         @csrf
         @method("PUT")
@@ -128,46 +129,11 @@
                             />
                         </div>
                     </div>
-
-                    <div class="col-span-full">
-                        <label
-                            for="category"
-                            class="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                            Status
-                        </label>
-                        <div class="mt-2">
-                            <select
-                                name="status"
-                                id="status"
-                                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            >
-                                <option
-                                    value="diajukan"
-                                    {{ $art->status == "diajukan" ? "selected" : "" }}
-                                >
-                                    Diajukan
-                                </option>
-                                <option
-                                    value="diterima"
-                                    {{ $art->status == "diterima" ? "selected" : "" }}
-                                >
-                                    Diterima
-                                </option>
-                                <option
-                                    value="ditolak"
-                                    {{ $art->status == "ditolak" ? "selected" : "" }}
-                                >
-                                    Ditolak
-                                </option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <a href="/article/" class="inline-block">
+                <a href="{{ route("admin.surat") }}" class="inline-block">
                     <button
                         type="button"
                         class="text-sm font-semibold leading-6 text-gray-900 border border-transparent p-2 rounded hover:border-gray-500"
@@ -175,13 +141,54 @@
                         Cancel
                     </button>
                 </a>
+
                 <button
-                    type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    type="button"
+                    onclick="submitForm('ditolak')"
+                    class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                 >
-                    Save
+                    Tolak
+                </button>
+
+                <button
+                    type="button"
+                    onclick="submitForm('diterima')"
+                    class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                    Publish
                 </button>
             </div>
         </div>
     </form>
+
+    <script>
+        function submitForm(status) {
+                const form = document.getElementById('articleForm');
+                const statusInput = document.createElement('input');
+                statusInput.type = 'hidden';
+                statusInput.name = 'status';
+                statusInput.value = status;
+                form.appendChild(statusInput);
+                form.submit();
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                });
+                @endif
+
+                @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                });
+                @endif
+            });
+    </script>
 </x-layout-admin>

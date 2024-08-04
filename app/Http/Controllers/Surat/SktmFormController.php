@@ -24,7 +24,7 @@ class SktmFormController extends Controller
     public function create()
     {
         $title='Form Surat Keterangan Tidak Mampu';
-        return view('surat.form.keramaian', compact('title'));
+        return view('surat.form.tidakmampu', compact('title'));
     }
 
     /**

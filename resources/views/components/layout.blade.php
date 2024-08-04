@@ -10,7 +10,7 @@
             type="image/png"
             href="https://i.ibb.co.com/nD5b5FF/Jatijajar.png"
         />
-        @vite("resources/css/app.css")
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <script
             defer

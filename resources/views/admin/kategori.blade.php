@@ -13,10 +13,10 @@
             </a>
         </div>
         <table
-            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-6"
+            class="w-full text-sm text-left rtl:text-right text-gray-500  mt-6"
         >
             <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                class="text-xs text-gray-700 uppercase bg-gray-50 "
             >
                 <tr>
                     <th scope="col" class="px-6 py-3">No.</th>
@@ -31,11 +31,11 @@
 
                 @foreach ($ktgr as $k)
                     <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        class="bg-white border-b "
                     >
                         <th
                             scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                         >
                             {{ $no++ }}
                         </th>

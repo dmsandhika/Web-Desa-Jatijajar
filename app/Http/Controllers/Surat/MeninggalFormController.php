@@ -15,7 +15,7 @@ class MeninggalFormController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -87,7 +87,7 @@ class MeninggalFormController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -120,12 +120,12 @@ class MeninggalFormController extends Controller
             
         
         if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
+            
             if ($data->file && file_exists(public_path($data->file))) {
                 unlink(public_path($data->file));
             }
     
-            // Simpan file baru
+            
             $file = $request->file('file');
             $timestamp = time();
             $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -136,10 +136,10 @@ class MeninggalFormController extends Controller
             $data->file = $filePath;
         }
     
-        // Simpan data formulir ke dalam basis data
+        
         $data->save();
         
-        // Redirect atau kembalikan respons sesuai kebutuhan
+        
         return redirect()->route('admin.surat')->with('success', 'Surat Berhasil Ditindaklanjuti');
     }
 
@@ -149,7 +149,7 @@ class MeninggalFormController extends Controller
     public function destroy(string $id)
     {
         try {
-            // Temukan data berdasarkan ID
+            
             $form = MeninggalForm::findOrFail($id);
 
             
@@ -171,16 +171,16 @@ class MeninggalFormController extends Controller
                 File::delete($file);
             }
 
-            // Hapus data dari database
+            
             $form->delete();
 
-            // Redirect dengan pesan sukses menggunakan SweetAlert2
+            
             return redirect()->route('admin.surat')->with('success', 'Data berhasil dihapus.');
         } catch (\Exception $e) {
-            // Log error
+            
             Log::error('Error deleting belumnikah form: ' . $e->getMessage());
 
-            // Redirect dengan pesan error menggunakan SweetAlert2
+            
             return redirect()->route('admin.surat')->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
     }

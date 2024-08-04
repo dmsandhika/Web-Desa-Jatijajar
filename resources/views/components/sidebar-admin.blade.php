@@ -65,6 +65,12 @@
                     </x-side-link>
                 </div>
             </div>
+            <div class="mt-2 rounded-md">
+                <x-side-link href="/admin/feedback" :active="request()->is('admin/feedback')">
+                    <i class="fas fa-comments mr-3"></i>
+                    Kritik dan Saran
+                </x-side-link>
+            </div>
             <!-- End of Artikel Dropdown -->
         </nav>
     </div>

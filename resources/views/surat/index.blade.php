@@ -77,18 +77,18 @@
     <div class="grid gap-6 lg:grid-cols-4 sm:grid-cols-2">
         @foreach ($data as $item)
             <div
-                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow "
             >
                 <a href="{{ $item["href"] }}">
                     <h5
-                        class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+                        class="mb-2 text-xl font-bold tracking-tight text-gray-900 "
                     >
                         {{ $item["title"] }}
                     </h5>
                 </a>
                 <a
                     href="{{ $item["href"] }}"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-300 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-300 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 "
                 >
                     Ajukan Surat
                     <svg

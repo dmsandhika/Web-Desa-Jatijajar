@@ -47,9 +47,13 @@ class DomisiliFormController extends Controller
                 'no' => 'required|numeric',
             ]);
 
+            $timestamp = now()->format('YmdHis');
+
+
             $ktp = $request->file('ktp');
-            $ktpPath = 'ktp/' . $ktp->getClientOriginalName();
-            $ktp->move(public_path('ktp'), $ktp->getClientOriginalName());
+            $ktpName = $timestamp . '_' . $ktp->getClientOriginalName();
+            $ktpPath = 'ktp/' . $ktpName;
+            $ktp->move(public_path('ktp'), $ktpName);
 
             DomisiliForm::create([
                 'nik' => $request->input('nik'),

@@ -3,7 +3,7 @@
 
     <div class="flex justify-between items-center w-full mb-8">
         <form
-            class="form relative w-1/4"
+            class="form relative w-3/4"
             action="{{ url("article") }}"
             method="get"
         >
@@ -27,7 +27,7 @@
                 </svg>
             </div>
             <input
-                class="input rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md w-full"
+                class="input rounded-full px-8 py-3 no-spinner border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-md w-full"
                 placeholder="Cari..."
                 name="search"
                 required=""

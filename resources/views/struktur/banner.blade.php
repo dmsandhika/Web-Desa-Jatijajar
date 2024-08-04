@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot>
 
     <div
-        class="p-5 border border-b-0 mb-5 border-gray-200 dark:border-gray-700 dark:bg-gray-900"
+        class="p-5 border border-b-0 mb-5 border-gray-200 "
     >
         <h4 class="text-2xl">Gambar Banner Saat Ini :</h4>
         <img src="{{ asset($banner->gambar) }}" alt="" />

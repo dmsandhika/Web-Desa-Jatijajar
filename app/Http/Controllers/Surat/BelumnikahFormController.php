@@ -26,12 +26,13 @@ class BelumnikahFormController extends Controller
         $title='Form Surat Keterangan Belum Nikah';
         return view('surat.form.belumnikah', compact('title'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        try {
         // Validasi data yang diterima dari formulir
         $request->validate([
             'nik' => 'required|string|max:20',
@@ -42,7 +43,6 @@ class BelumnikahFormController extends Controller
             'kk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        try {
             $timestamp = now()->format('YmdHis');
 
             $ktp = $request->file('ktp');
@@ -50,7 +50,6 @@ class BelumnikahFormController extends Controller
             $ktpPath = 'ktp/' . $ktpName;
             $ktp->move(public_path('ktp'), $ktpName);
             
-            // Menangani file KTP
     
             // Menangani file KK
             $kk = $request->file('kk');

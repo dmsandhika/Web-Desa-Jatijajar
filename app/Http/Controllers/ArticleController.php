@@ -52,6 +52,7 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        try {
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|exists:categories,id',
@@ -61,7 +62,6 @@ class ArticleController extends Controller
         ]);
     
         $slug = Str::slug($request->title, '-');
-        try {
             $article = new Article();
             $article->title = $request->title;
             $article->category_id = $request->category;
@@ -79,7 +79,7 @@ class ArticleController extends Controller
             $article->save();
     
     
-            return redirect()->route('  articles.success')->with('success', 'Artikel Berhasil Diajukan');
+            return redirect()->route('articles.success')->with('success', 'Artikel Berhasil Diajukan');
         } catch (\Exception $e) {
             Log::error('Error storing article form: ' . $e->getMessage());
     
@@ -151,7 +151,7 @@ class ArticleController extends Controller
     
         $article->save();
     
-        return redirect()->route('article.list')->with('success', 'Article updated successfully.');
+        return redirect()->route('admin.article')->with('success', 'Article Berhasil Ditindaklanjuti');
     }
     
 
@@ -175,7 +175,7 @@ class ArticleController extends Controller
         $article->delete();
     
         // Redirect dengan pesan sukses
-        return redirect()->route('article.list')->with('success', 'Artikel berhasil dihapus');
+        return redirect()->route('admin.article')->with('success', 'Artikel berhasil dihapus');
     }
 
 

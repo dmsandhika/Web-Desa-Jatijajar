@@ -13,6 +13,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\DataSuratController;
+use App\Http\Controllers\KritikFormController;
 use App\Http\Controllers\Surat\KIAFormController;
 use App\Http\Controllers\Surat\EktpFormController;
 use App\Http\Controllers\Surat\SkckFormController;
@@ -33,6 +34,10 @@ Route::get('/', [ArticleController::class, 'latestArticles']);
 Route::get('/profil', function () {
     return view('profil', ['title'=>'Profil Desa']);
 });
+Route::get('/kontak', function () {
+    return view('contact', ['title'=>'Kontak']);
+})->name('contact');
+Route::post('/kontak', [KritikFormController::class, 'store'])->name('contact.store');
 Route::get('/struktur', function () {
     return view('struktur', ['title'=>'Struktur Organisasi Desa', 'struktur'=>Struktur::all(), 'bnr'=>Banner::findOrFail(1)]);
 });
@@ -92,9 +97,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/surat/ditolak', [DataSuratController::class, 'ditolak'])->name('admin.surat.ditolak');
     Route::get('/admin/surat/selesai', [DataSuratController::class, 'selesai'])->name('admin.surat.selesai');
     Route::get('/admin/artikel/daftar', [ArticleController::class, 'all'])->name('admin.article');
+    Route::get('/admin/feedback', [KritikFormController::class, 'index',])->name('admin.feedback');
     Route::get('/admin/artikel/daftar/diajukan', [ArticleController::class, 'diajukan'])->name('article.list.diajukan');
     Route::get('/admin/artikel/daftar/ditolak', [ArticleController::class, 'ditolak'])->name('article.list.ditolak');
-    Route::get('/admin/artikel/daftar/daftar', [ArticleController::class, 'diterima'])->name('article.list.diterima');
+    Route::get('/admin/artikel/daftar/publish', [ArticleController::class, 'diterima'])->name('article.list.diterima');
     Route::get('/admin/artikel/kategori', function () {
         return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
     })->name('kategori.list');
