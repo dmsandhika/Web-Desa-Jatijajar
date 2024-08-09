@@ -274,45 +274,43 @@
     </a>
 </div>
 
+<div class="flex flex-col md:flex-row gap-6 mt-12">
+    <!-- Left Column for Digitalisasi Info (2 parts) -->
+    <div class="flex-2 bg-gray-100 p-6 rounded-lg shadow-md" style="flex: 2;">
+        <h2 class="text-2xl font-bold mb-4">Manfaat Digitalisasi Administrasi Desa</h2>
+        <p class="text-base text-justify">
+            Digitalisasi administrasi desa menawarkan berbagai manfaat signifikan bagi pengelolaan pemerintahan lokal. Pertama, digitalisasi mempermudah akses dan pengelolaan data administratif. Dengan sistem digital, data seperti dokumen kependudukan, laporan keuangan, dan catatan kegiatan dapat diakses dan dikelola dengan lebih efisien. Hal ini tidak hanya mengurangi beban kerja administratif tetapi juga meningkatkan akurasi data serta mengurangi kemungkinan kehilangan atau kerusakan dokumen fisik.
+        </p>
+        <p class="text-base mt-5 text-justify">
+            Kedua, digitalisasi mendukung transparansi dan akuntabilitas dalam administrasi desa. Dengan sistem digital, setiap transaksi dan perubahan data dapat dicatat dan dilacak dengan mudah, sehingga meminimalkan kemungkinan penyalahgunaan wewenang atau kecurangan. Selain itu, digitalisasi memungkinkan masyarakat untuk lebih aktif terlibat dan memantau proses administrasi, yang pada gilirannya dapat meningkatkan kepercayaan dan partisipasi warga dalam kegiatan pemerintahan desa.
+        </p>
+    </div>
 
-    <div class="flex flex-col md:flex-row gap-6 mt-12">
-        <!-- Left Column for Digitalisasi Info (Wider - 3 parts) -->
-        <div class="flex-1 bg-gray-100 p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Manfaat Digitalisasi Administrasi Desa</h2>
-            <p class="text-base text-justify">
-                Digitalisasi administrasi desa menawarkan berbagai manfaat signifikan bagi pengelolaan pemerintahan lokal. Pertama, digitalisasi mempermudah akses dan pengelolaan data administratif. Dengan sistem digital, data seperti dokumen kependudukan, laporan keuangan, dan catatan kegiatan dapat diakses dan dikelola dengan lebih efisien. Hal ini tidak hanya mengurangi beban kerja administratif tetapi juga meningkatkan akurasi data serta mengurangi kemungkinan kehilangan atau kerusakan dokumen fisik. </p>
-            <p class="text-base mt-5 text-justify">
-                Kedua, digitalisasi mendukung transparansi dan akuntabilitas dalam administrasi desa. Dengan sistem digital, setiap transaksi dan perubahan data dapat dicatat dan dilacak dengan mudah, sehingga meminimalkan kemungkinan penyalahgunaan wewenang atau kecurangan. Selain itu, digitalisasi memungkinkan masyarakat untuk lebih aktif terlibat dan memantau proses administrasi, yang pada gilirannya dapat meningkatkan kepercayaan dan partisipasi warga dalam kegiatan pemerintahan desa. </p>
-        </div>
-
-        <!-- Right Column for Artikel Terbaru (Narrower - 2 parts) -->
-        <div class="flex-1 min-w-0">
-            <h1 class="text-3xl font-bold  mb-6">
-                Artikel Terbaru
-            </h1>
-
-            <div class="flex flex-col gap-6">
-                @foreach ($articles as $art)
-                    <div
-                        class="flex flex-col gap-2  bg-white cursor-pointer  p-5 rounded-md shadow-md hover:scale-105 hover:duration-150 duration-150"
-                        onclick="window.location.href='/article/{{ $art["slug"] }}'"
-                    >
-                        <div class="flex flex-row justify-between w-full">
-                            <p class="text-xs">{{ $art["author"] }}</p>
-                            <p class="text-xs">
-                                {{ $art->created_at->translatedFormat("j F Y") }}
-                            </p>
-                        </div>
-                        <div class="flex flex-row justify-between w-full">
-                            <h3 class="text-xl font-bold">{{ $art["title"] }}</h3>
-                        </div>
-
-                        <div class="text-sm">
-                            {{ Str::limit($art["content"], 100) }}
-                        </div>
+    <!-- Middle Column for Artikel Terbaru (2 parts) -->
+    <div class="flex-2 min-w-0" style="flex: 2;">
+        <h1 class="text-3xl font-bold mb-6">Artikel Terbaru</h1>
+        <div class="flex flex-col gap-6">
+            @foreach ($articles as $art)
+                <div class="flex flex-col gap-2 bg-white cursor-pointer p-5 rounded-md shadow-md hover:scale-105 hover:duration-150 duration-150" onclick="window.location.href='/article/{{ $art["slug"] }}'">
+                    <div class="flex flex-row justify-between w-full">
+                        <p class="text-xs">{{ $art["author"] }}</p>
+                        <p class="text-xs">{{ $art->created_at->translatedFormat("j F Y") }}</p>
                     </div>
-                @endforeach
-            </div>
+                    <div class="flex flex-row justify-between w-full">
+                        <h3 class="text-xl font-bold">{{ $art["title"] }}</h3>
+                    </div>
+                  
+                </div>
+            @endforeach
         </div>
     </div>
+
+    <!-- Right Column for Image (1 part) -->
+    <div class="flex-1 min-w-0" style="flex: 1;">
+        <img src="img/infografis.png" alt="Descriptive Image" class="w-full h-auto rounded-lg shadow-md">
+    </div>
+</div>
+
+
+
 </x-layout>

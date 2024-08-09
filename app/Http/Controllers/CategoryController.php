@@ -58,7 +58,11 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Category::find($id);
+        $title = 'Edit Kategori';
+        
+        
+        return view('admin.editkategori', compact('data', 'title'));
     }
 
     /**
@@ -66,7 +70,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Temukan kategori berdasarkan ID
+        $kategori = Category::findOrFail($id);
+
+        // Perbarui data kategori
+        $kategori->name = $request->input('name');
+        $kategori->slug = Category::createSlug($request->input('name'));
+        $kategori->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('kategori.list')->with('success', 'Kategori berhasil diperbarui');
     }
 
     /**

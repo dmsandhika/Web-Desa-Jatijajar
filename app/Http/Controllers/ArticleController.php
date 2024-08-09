@@ -37,7 +37,35 @@ class ArticleController extends Controller
         return view('articles.article', ['title' => 'Galeri Kegiatan', 'articles' => $articles, 'hasArticles' => $hasArticles]);
     }
 
-
+    public function categoryArticles(Request $request, Category $category)
+    {
+        // Ambil kata kunci pencarian dari request
+        $search = $request->input('search');
+    
+        // Query untuk mendapatkan artikel berdasarkan kategori dan status diterima
+        $query = $category->articles()->where('status', 'diterima');
+    
+        // Jika ada kata kunci pencarian, tambahkan kondisi pencarian ke query
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('content', 'LIKE', "%{$search}%");
+            });
+        }
+    
+        // Ambil artikel yang sudah difilter dan diurutkan berdasarkan tanggal pembuatan
+        $articles = $query->orderBy('created_at', 'desc')->get();
+    
+        $hasArticles = $articles->isNotEmpty();
+    
+        // Kembalikan view dengan artikel yang sesuai
+        return view('articles.article', [
+            'title' => 'Artikel Kategori ' . $category->name,
+            'articles' => $articles,
+            'hasArticles' => $hasArticles
+        ]);
+    }
+    
     public function latestArticles()
     {
         $articles = Article::where('status', 'diterima')->orderBy('created_at', 'desc')->take(3)->get();
@@ -181,7 +209,7 @@ class ArticleController extends Controller
 
     public function countArticles()
     {
-        $submittedArticlesCount = Article::count();
+        $submittedArticlesCount = Article::where('status', 'diajukan')->count();
         $acceptedArticlesCount = Article::where('status', 'diterima')->count();
 
         return response()->json([

@@ -46,8 +46,10 @@ Route::get('/article/succes', function () {
     return view('articles.success');
 })->name('articles.success');
 Route::get('/article/{article:slug}', function (Article $article) {
-    return view('articles.single-article', ['title'=>'Single Post', 'article'=>$article]);
+    return view('articles.single-article', ['title'=>'Artikel', 'article'=>$article]);
 });
+Route::get('/category/{category:slug}', [ArticleController::class, 'categoryArticles']);
+
 
 Route::get('/articles/create', [ ArticleController::class, 'create']);
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
@@ -105,6 +107,8 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.kategori', ['title'=>'Kategori Artikel', 'ktgr'=>Category::all()]);
     })->name('kategori.list');
     Route::post('/admin/artikel/kategori', [CategoryController::class, 'store'])->name('kategori.store');
+    Route::get('/admin/artikel/kategori/edit/{id}', [CategoryController::class, 'edit'])->name('kategori.edit');
+    Route::put('/admin/artikel/kategori/{id}', [CategoryController::class, 'update'])->name('kategori.update');
     Route::delete('/admin/artikel/kategori/{id}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
 
     Route::get('/admin/struktur', function () {

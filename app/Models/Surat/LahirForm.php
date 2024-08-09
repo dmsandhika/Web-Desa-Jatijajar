@@ -18,6 +18,7 @@ class LahirForm extends Model
         'suket',
         'ktp_ayah',
         'ktp_ibu',
+        'surat_nikah',
         'saksi1',
         'saksi2',
         'note',

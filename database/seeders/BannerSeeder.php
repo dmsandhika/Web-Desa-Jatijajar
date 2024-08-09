@@ -15,7 +15,7 @@ class BannerSeeder extends Seeder
     {
         Banner::create(
             [
-            'gambar' => 'banner/struktur.jpg',
+            'gambar' => 'banner/image.png',
             'created_at' => now(),
             'updated_at' => now()
         ]

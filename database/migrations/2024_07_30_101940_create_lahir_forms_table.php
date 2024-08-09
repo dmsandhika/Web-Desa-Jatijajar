@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('suket');
             $table->string('ktp_ayah');
             $table->string('ktp_ibu');
+            $table->string('surat_nikah');
             $table->string('saksi1');
             $table->string('saksi2');
             $table->text('note')->nullable();

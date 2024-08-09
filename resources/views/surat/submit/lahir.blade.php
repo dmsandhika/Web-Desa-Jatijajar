@@ -70,6 +70,16 @@
             </div>
           </div>
           <div class="col-span-full">
+            <label for="surat_nikah" class="block text-sm font-medium leading-6 text-gray-900">Scan Surat Nikah</label>
+            <div class="mt-2">
+              @if (pathinfo($data->surat_nikah, PATHINFO_EXTENSION) == 'pdf')
+                  <a href="{{ asset($data->surat_nikah) }}" download class="bg-blue-500 text-white px-3 py-2 rounded">Download PDF</a>
+              @else
+                  <img src="{{ asset($data->surat_nikah) }}" alt="surat_nikah" class="h-40 w-auto object-cover cursor-pointer" onclick="openFullScreen('{{ asset($data->ktp_ibu) }}')">
+              @endif
+            </div>
+          </div>
+          <div class="col-span-full">
             <label for="saksi1" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 1</label>
             <div class="mt-2">
               @if (pathinfo($data->saksi1, PATHINFO_EXTENSION) == 'pdf')

@@ -44,7 +44,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <a
-                                href="#"
+                                href="{{ route("kategori.edit", $k->id) }}"
                                 class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded"
                             >
                                 <i class="fas fa-pencil-alt mr-2"></i>

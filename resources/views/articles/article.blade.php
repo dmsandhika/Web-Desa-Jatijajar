@@ -81,7 +81,7 @@
                         {{ $blog->author }}
                     </a>
                     |
-                    <a href="" class="hover:underline group-hover:text-white">
+                    <a href="/category/{{ $blog->category->slug }}" class="hover:underline group-hover:text-white">
                         {{ $blog->category->name }}
                     </a>
                     | {{ $blog->created_at->diffForHumans() }}

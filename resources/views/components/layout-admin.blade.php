@@ -74,7 +74,7 @@
     <body class="bg-gray-100 font-family-karla flex">
         <x-sidebar-admin></x-sidebar-admin>
         <div class="w-full flex flex-col h-screen overflow-y-hidden">
-            <div class="w-full overflow-x-hidden border-t flex flex-col">
+            <div class="w-full overflow-x-hidden  border-t flex flex-col">
                 <main class="w-full flex-grow p-6">
                     <x-header-admin>{{ $title }}</x-header-admin>
                     {{ $slot }}

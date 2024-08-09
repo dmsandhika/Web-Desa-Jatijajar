@@ -43,6 +43,7 @@ class LahirFormController extends Controller
                 'suket' => 'required|file|mimes:jpg,png,pdf|max:2048',
                 'ktp_ayah' => 'required|file|mimes:jpg,png,pdf|max:2048',
                 'ktp_ibu' => 'required|file|mimes:jpg,png,pdf|max:2048',
+                'surat_nikah' => 'required|file|mimes:jpg,png,pdf|max:2048',
                 'saksi1' => 'required|file|mimes:jpg,png,pdf|max:2048',
                 'saksi2' => 'required|file|mimes:jpg,png,pdf|max:2048',
             ]);
@@ -63,6 +64,11 @@ class LahirFormController extends Controller
             $ktpIbuName = $timestamp . '_' . $ktp_ibu->getClientOriginalName();
             $ktpIbuPath = 'ktp/' . $ktpIbuName;
             $ktp_ibu->move(public_path('ktp'), $ktpIbuName);
+            
+            $surat_nikah = $request->file('surat_nikah');
+            $surat_nikahName = $timestamp . '_' . $surat_nikah->getClientOriginalName();
+            $surat_nikahPath = 'nikah/' . $surat_nikahName;
+            $surat_nikah->move(public_path('nikah'), $surat_nikahName);
 
             $saksi1 = $request->file('saksi1');
             $saksi1Name = $timestamp . '_' . $saksi1->getClientOriginalName();
@@ -83,6 +89,7 @@ class LahirFormController extends Controller
                 'suket' => $suketPath,
                 'ktp_ayah' => $ktpAyahPath,
                 'ktp_ibu' => $ktpIbuPath,
+                'surat_nikah' => $surat_nikahPath,
                 'saksi1' => $saksi1Path,
                 'saksi2' => $saksi2Path,
             ]);
@@ -177,6 +184,10 @@ class LahirFormController extends Controller
             $ktp_ibu = public_path($form->ktp_ibu);
             if (File::exists($ktp_ibu)) {
                 File::delete($ktp_ibu);
+            }
+            $surat_nikah = public_path($form->surat_nikah);
+            if (File::exists($surat_nikah)) {
+                File::delete($surat_nikah);
             }
             $saksi1 = public_path($form->saksi1);
             if (File::exists($saksi1)) {

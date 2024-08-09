@@ -39,31 +39,37 @@
             </div>
           </div>
           <div class="col-span-full">
-            <label for="suket" class="block text-sm font-medium leading-6 text-gray-900">Scan Surat Keterangan Lahir dari RS (Berstempel)</label>
+            <label for="suket" class="block text-sm font-medium leading-6 text-gray-900">Scan Surat Keterangan Lahir dari RS Berstempel (Max 2MB)</label>
             <div class="mt-2">
               <input type="file" name="suket" id="suket" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full">
-            <label for="ktp_ayah" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Ayah</label>
+            <label for="ktp_ayah" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Ayah (Max 2MB)</label>
             <div class="mt-2">
               <input type="file" name="ktp_ayah" id="ktp_ayah" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full">
-            <label for="ktp_ibu" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Ibu</label>
+            <label for="ktp_ibu" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Ibu (Max 2MB)</label>
             <div class="mt-2">
               <input type="file" name="ktp_ibu" id="ktp_ibu" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full">
-            <label for="saksi1" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 1</label>
+            <label for="surat_nikah" class="block text-sm font-medium leading-6 text-gray-900">Scan Surat Nikah (Max 2MB)</label>
+            <div class="mt-2">
+              <input type="file" name="surat_nikah" id="surat_nikah" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+          <div class="col-span-full">
+            <label for="saksi1" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 1 (Max 2MB)</label>
             <div class="mt-2">
               <input type="file" name="saksi1" id="saksi1" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
           <div class="col-span-full">
-            <label for="saksi2" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 2</label>
+            <label for="saksi2" class="block text-sm font-medium leading-6 text-gray-900">Scan KTP Saksi 2 (Max 2MB)</label>
             <div class="mt-2">
               <input type="file" name="saksi2" id="saksi2" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>

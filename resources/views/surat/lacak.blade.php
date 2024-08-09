@@ -138,5 +138,8 @@
                 </tbody>
             </table>
         @endif
+        <a href="/surat" class="font-medium text-yellow-300 hover:underline">
+            &laquo; Kembali
+        </a>
     </div>
 </x-layout>

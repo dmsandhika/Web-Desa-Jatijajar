@@ -75,7 +75,7 @@
                             for="ktp"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP
+                            Foto Scan KTP (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -92,7 +92,7 @@
                             for="kk"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KK
+                            Foto Scan KK (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input

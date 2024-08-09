@@ -53,7 +53,7 @@
                             for="ktp_pemberi"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Pemberi Kuasa
+                            Foto Scan KTP Pemberi Kuasa (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -115,7 +115,7 @@
                             for="ktp_penerima"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Penerima Kuasa
+                            Foto Scan KTP Penerima Kuasa (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input

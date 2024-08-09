@@ -54,7 +54,7 @@
                             for="ktp_pemohon"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Pemohon
+                            Foto Scan KTP Pemohon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -71,7 +71,7 @@
                             for="ktp_ayah"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Ayah Pemohon
+                            Foto Scan KTP Ayah Pemohon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -88,7 +88,7 @@
                             for="ktp_ibu"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Ibu Pemohon
+                            Foto Scan KTP Ibu Pemohon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -105,7 +105,7 @@
                             for="ktp_calon"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Calon
+                            Foto Scan KTP Calon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -122,7 +122,7 @@
                             for="kk_pemohon"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KK Pemohon
+                            Foto Scan KK Pemohon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -139,7 +139,7 @@
                             for="kk_calon"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KK Calon
+                            Foto Scan KK Calon (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -174,7 +174,7 @@
                             for="ktp_wali"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KTP Wali
+                            Foto Scan KTP Wali (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input

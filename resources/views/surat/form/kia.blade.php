@@ -72,7 +72,7 @@
                             for="akta"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan Akta Anak
+                            Foto Scan Akta Anak (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -89,7 +89,7 @@
                             for="kk"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto Scan KK
+                            Foto Scan KK (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
@@ -106,7 +106,7 @@
                             for="foto"
                             class="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Foto 4 x 6
+                            Foto 4 x 6 (Max 2MB)
                         </label>
                         <div class="mt-2">
                             <input
