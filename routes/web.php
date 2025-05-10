@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\DataSuratController;
 use App\Http\Controllers\KritikFormController;
+use App\Http\Controllers\ConfigSuratController;
 use App\Http\Controllers\Surat\KIAFormController;
 use App\Http\Controllers\Surat\EktpFormController;
 use App\Http\Controllers\Surat\SkckFormController;
@@ -170,5 +171,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'edit'])->name('surat.usaha.detail');
     Route::delete('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'destroy'])->name('surat.usaha.delete');
     Route::put('/admin/surat/Usaha/{id}', [UsahaFormController::class, 'update'])->name('surat.usaha.update');
+
+    Route::prefix('admin/surat/config')->group(function () {
+        Route::get('/', [ConfigSuratController::class, 'index'])->name('surat.config.index');
+        Route::delete('/{id}', [ConfigSuratController::class, 'destroy'])->name('surat.config.delete');
+    });
 
 });
