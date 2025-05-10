@@ -1,71 +1,6 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot>
 
-    @php
-        $data = [
-            [
-                "title" => "Keterangan Belum Nikah",
-                "href" => route("belumnikah.create"),
-            ],
-            [
-                "title" => "Keterangan Domisili",
-                "href" => route("domisili.create"),
-            ],
-            [
-                "title" => "Keterangan Lahir",
-                "href" => route("lahir.create"),
-            ],
-            [
-                "title" => "Keterangan Meninggal",
-                "href" => route("meninggal.create"),
-            ],
-            [
-                "title" => "Keterangan Tidak Mampu",
-                "href" => route("sktm.create"),
-            ],
-            [
-                "title" => "Keterangan Usaha",
-                "href" => route("usaha.create"),
-            ],
-            [
-                "title" => "Pengantar Izin Keramaian",
-                "href" => route("keramaian.create"),
-            ],
-            [
-                "title" => "Pengantar E-Ktp",
-                "href" => route("ektp.create"),
-            ],
-            [
-                "title" => "Pengantar SKCK",
-                "href" => route("skck.create"),
-            ],
-            [
-                "title" => "Keterangan Kehilangan",
-                "href" => route("hilang.create"),
-            ],
-            [
-                "title" => "Keterangan Penghasilan",
-                "href" => route("hasil.create"),
-            ],
-            [
-                "title" => "Surat Rekomendasi",
-                "href" => route("rekomendasi.create"),
-            ],
-            [
-                "title" => "Permohonan Kuasa",
-                "href" => route("kuasa.create"),
-            ],
-            [
-                "title" => "KIA (Kartu Identitas Anak)",
-                "href" => route("kia.create"),
-            ],
-            [
-                "title" => "Surat Pengantar Nikah",
-                "href" => route("nikah.create"),
-            ],
-        ];
-    @endphp
-
     <div class="flex justify-end p-5">
         <a
             href="{{ route("surat.search") }}"
@@ -75,20 +10,20 @@
         </a>
     </div>
     <div class="grid gap-6 lg:grid-cols-4 sm:grid-cols-2">
-        @foreach ($data as $item)
+        @foreach ($surat as $item)
             <div
-                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow "
+                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow"
             >
-                <a href="{{ $item["href"] }}">
+                <a href="{{ route("surat.show", $item->id) }}">
                     <h5
-                        class="mb-2 text-xl font-bold tracking-tight text-gray-900 "
+                        class="mb-2 text-xl font-bold tracking-tight text-gray-900"
                     >
-                        {{ $item["title"] }}
+                        {{ $item->name }}
                     </h5>
                 </a>
                 <a
-                    href="{{ $item["href"] }}"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-300 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    href="{{ route("surat.show", $item->id) }}"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-300 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300"
                 >
                     Ajukan Surat
                     <svg

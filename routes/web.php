@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
@@ -54,8 +55,9 @@ Route::get('/category/{category:slug}', [ArticleController::class, 'categoryArti
 
 Route::get('/articles/create', [ ArticleController::class, 'create']);
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('/surat', function () {
-    return view('surat.index', ['title'=>'Pengajuan Surat']);
+Route::prefix('surat')->group(function () {
+   Route::get('/', [SuratController::class, 'index'])->name('surat.index'); 
+   Route::get('/{id}', [SuratController::class, 'show'])->name('surat.show');
 });
 Route::get('/surat/lacak', [DataSuratController::class, 'search'])->name('surat.search');
 Route::get('/surat/form_belumnikah', [BelumnikahFormController::class, 'create'])->name('belumnikah.create');
