@@ -175,6 +175,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin/surat/config')->group(function () {
         Route::get('/', [ConfigSuratController::class, 'index'])->name('surat.config.index');
         Route::delete('/{id}', [ConfigSuratController::class, 'destroy'])->name('surat.config.delete');
+        Route::get('/create', [ConfigSuratController::class, 'create'])->name('surat.config.create');
+        Route::post('/', [ConfigSuratController::class, 'store'])->name('surat.config.store');
+        Route::get('/{id}/edit', [ConfigSuratController::class, 'edit'])->name('surat.config.edit');
+        Route::put('/{id}', [ConfigSuratController::class, 'update'])->name('surat.config.update');
     });
 
 });

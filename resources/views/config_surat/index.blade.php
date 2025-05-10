@@ -1,7 +1,15 @@
 <x-layout-admin>
     <x-slot:title>{{ $title }}</x-slot>
-
-    <div class="relative mt-10 overflow-x-auto">
+    <div class="flex justify-end mt-10">
+        <a
+            href="{{ route("surat.config.create") }}"
+            class="inline-flex items-center px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700"
+        >
+            <i class="mr-2 fas fa-plus"></i>
+            Tambah Data
+        </a>
+    </div>
+    <div class="relative mt-6 overflow-x-auto">
         <table
             id="dataTable"
             class="w-full mt-10 text-sm text-left text-gray-500 rtl:text-right"
@@ -25,7 +33,7 @@
                         <td class="px-6 py-4">{{ $config->name }}</td>
                         <td class="px-6 py-4">
                             <a
-                                href="#"
+                                href="{{ route("surat.config.edit", $config->id) }}"
                                 class="inline-flex items-center px-2 py-1 font-bold text-white bg-yellow-500 rounded hover:bg-yellow-700"
                             >
                                 <i class="mr-2 fas fa-pencil-alt"></i>
