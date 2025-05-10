@@ -4,7 +4,7 @@
     <div class="flex justify-center items-center h-full">
         <form
             class="form relative"
-            action="{{ route("surat.search") }}"
+            action="{{ route("surat.lacak") }}"
             method="GET"
         >
             <button
@@ -97,8 +97,8 @@
                             >
                                 {{ $no++ }}
                             </th>
-                            <td class="px-6 py-4">{{ $s->nik }}</td>
-                            <td class="px-6 py-4">{{ $s->nama }}</td>
+                            <td class="px-6 py-4">{{ $s->data }}</td>
+                            {{-- <td class="px-6 py-4">{{ $s->nama }}</td> --}}
                             <td class="px-6 py-4">{{ $s->jenis_surat }}</td>
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($s->created_at)->format("d-m-Y") }}
@@ -115,7 +115,7 @@
                                 }
                             @endphp
 
-                            <td class="px-6 py-4">{{ $s->note }}</td>
+                            {{-- <td class="px-6 py-4">{{ $s->note }}</td> --}}
                             <td class="px-6 py-4">
                                 <span class="{{ $bgColor }}">
                                     {{ $status }}
@@ -138,6 +138,7 @@
                 </tbody>
             </table>
         @endif
+
         <a href="/surat" class="font-medium text-yellow-300 hover:underline">
             &laquo; Kembali
         </a>

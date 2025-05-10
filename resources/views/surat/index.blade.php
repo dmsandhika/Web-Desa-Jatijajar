@@ -3,7 +3,7 @@
 
     <div class="flex justify-end p-5">
         <a
-            href="{{ route("surat.search") }}"
+            href="{{ route("surat.lacak") }}"
             class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-[#faca15] hover:bg-white cursor-pointer hover:border-[#faca15] hover:text-[#faca15] focus:text-[#faca15] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200"
         >
             Cek Surat
@@ -45,4 +45,24 @@
             </div>
         @endforeach
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+                @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                });
+                @endif
+
+                @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                });
+                @endif
+            });
+    </script>
 </x-layout>

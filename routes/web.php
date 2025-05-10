@@ -56,10 +56,11 @@ Route::get('/category/{category:slug}', [ArticleController::class, 'categoryArti
 Route::get('/articles/create', [ ArticleController::class, 'create']);
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::prefix('surat')->group(function () {
-   Route::get('/', [SuratController::class, 'index'])->name('surat.index'); 
+    Route::get('/', [SuratController::class, 'index'])->name('surat.index'); 
+    Route::get('/lacak', [SuratController::class, 'lacak'])->name('surat.lacak');
    Route::get('/{id}', [SuratController::class, 'show'])->name('surat.show');
+   Route::post('/', [SuratController::class, 'store'])->name('surat.store');
 });
-Route::get('/surat/lacak', [DataSuratController::class, 'search'])->name('surat.search');
 Route::get('/surat/form_belumnikah', [BelumnikahFormController::class, 'create'])->name('belumnikah.create');
 Route::post('/surat/form_belumnikah', [BelumnikahFormController::class, 'store'])->name('belumnikah.store');
 Route::get('/surat/form_domisili', [DomisiliFormController::class, 'create'])->name('domisili.create');

@@ -1,13 +1,22 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot>
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form
+        action="{{ route("surat.store") }}"
+        method="POST"
+        enctype="multipart/form-data"
+    >
         @csrf
         <div class="space-y-12">
             <div class="pb-12 border-b border-gray-900/10">
                 <div
                     class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6"
                 >
+                    <input
+                        type="hidden"
+                        name="jenis_surat"
+                        value="{{ $surat->name }}"
+                    />
                     @foreach ($config as $key => $type)
                         @if ($type == "text")
                             <div class="col-span-full">
@@ -20,6 +29,25 @@
                                 <div class="mt-2">
                                     <input
                                         type="text"
+                                        placeholder="Masukkan {{ $key }}"
+                                        name="{{ $key }}"
+                                        id="{{ $key }}"
+                                        autocomplete="off"
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+                        @elseif ($type == "number")
+                            <div class="col-span-full">
+                                <label
+                                    for="{{ $key }}"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                    {{ $key }}
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        type="number"
                                         placeholder="Masukkan {{ $key }}"
                                         name="{{ $key }}"
                                         id="{{ $key }}"
