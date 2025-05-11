@@ -131,7 +131,8 @@
                             <td class="px-6 py-4">
                                 @if (! empty($s->file))
                                     <a
-                                        href="{{ asset($s->file) }}"
+                                        href="{{ asset("storage/" . $s->file) }}"
+                                        download
                                         class="inline-flex items-center bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-1 px-2 rounded"
                                     >
                                         Unduh File

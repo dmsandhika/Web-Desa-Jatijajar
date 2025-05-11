@@ -30,11 +30,9 @@
     <div class="relative overflow-x-auto">
         <table
             id="dataTable"
-            class="w-full text-sm text-left rtl:text-right text-gray-500  mt-6"
+            class="w-full text-sm text-left rtl:text-right text-gray-500 mt-6"
         >
-            <thead
-                class="text-xs text-gray-700 uppercase bg-gray-50 "
-            >
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">No.</th>
                     <th scope="col" class="px-6 py-3">NIK</th>
@@ -51,23 +49,26 @@
                 @endphp
 
                 @foreach ($data as $s)
-                    <tr
-                        class="bg-white border-b "
-                    >
+                    @php
+                        $nik = $s->data["NIK"] ?? ($s->data["NIK_Pemohon"] ?? "-");
+                        $nama = $s->data["Nama"] ?? ($s->data["Nama_Pemohon"] ?? ($s->data["Nama_Lengkap"] ?? "-"));
+                    @endphp
+
+                    <tr class="bg-white border-b">
                         <th
                             scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                         >
-                            {{ $no++ }}
+                            {{ $loop->iteration }}
                         </th>
-                        <td class="px-6 py-4">{{ $s->nik }}</td>
-                        <td class="px-6 py-4">{{ $s->nama }}</td>
+                        <td class="px-6 py-4">{{ $nik }}</td>
+                        <td class="px-6 py-4">{{ $nama }}</td>
                         <td class="px-6 py-4">{{ $s->jenis_surat }}</td>
                         <td class="px-6 py-4">
                             {{ \Carbon\Carbon::parse($s->created_at)->format("d-m-Y") }}
                         </td>
                         @php
-                            $status = $s["status"];
+                            $status = $s->status;
                             $bgColor = "";
 
                             if ($status === "selesai") {
@@ -86,14 +87,14 @@
                         </td>
                         <td class="px-6 py-4">
                             <a
-                                href="{{ $s->detail_url }}"
+                                href="{{ route("admin.surat.detail", $s->id) }}"
                                 class="inline-flex items-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded"
                             >
                                 <i class="fas fa-pencil-alt mr-2"></i>
                                 Detail
                             </a>
                             <form
-                                action="{{ $s->delete_url }}"
+                                action="{{ route("admin.surat.delete", $s->id) }}"
                                 method="POST"
                                 class="inline-block"
                                 onsubmit="return confirm('Apakah Anda yakin ingin menghapus surat ini?');"

@@ -58,4 +58,50 @@ class SuratController extends Controller
 
         return view('surat.lacak', compact( 'title', 'data'));
     }
+
+    public function dataSurat(){
+        $data = Surat::all();
+        $title = 'Data Surat';
+        foreach($data as $item){
+                $item->data = json_decode($item->data, true);
+            }
+        return view('admin.surat.index', compact('title', 'data'));
+    }
+
+    public function editSurat($id){
+        $surat = Surat::find($id);
+        $surat->data = json_decode($surat->data, true);
+        $config = ConfigSurat::where('name', $surat->jenis_surat)->first();
+        $config = json_decode($config->value, true); 
+
+        $title = 'Detail Surat';
+        return view('admin.surat.edit', compact('surat', 'title', 'config'));
+    }
+
+    public function updateSurat(Request $request, $id){
+        $surat = Surat::find($id);
+        $request->validate([
+            'note' => 'nullable|string',
+            'file' => 'nullable|file|mimes:pdf|max:5120',
+            'status' => 'required|in:diajukan,selesai,ditolak'
+        ]);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $path = $file->storeAs('uploads/surat', $filename, 'public');
+            $surat->file = $path;
+        }
+
+        $surat->note = $request->note;
+        $surat->status = $request->status;
+        $surat->save();
+        return redirect('/admin/surat')->with('success', 'Surat berhasil diupdate');
+    
+    }
+
+    public function destroySurat($id){
+        $surat = Surat::find($id);
+        $surat->delete();
+        return redirect('/admin/surat')->with('success', 'Surat berhasil dihapus');
+    }
 }
