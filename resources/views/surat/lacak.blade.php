@@ -58,7 +58,7 @@
     </div>
 
     <div>
-        @if ($data->isEmpty())
+        @if (! $data)
             <div class="text-center text-xl font-bold text-gray-500 mt-6">
                 Tidak ada data yang ditampilkan
             </div>
@@ -88,6 +88,11 @@
                     @endphp
 
                     @foreach ($data as $s)
+                        @php
+                            $nik = $s->data["NIK"] ?? ($s->data["NIK_Pemohon"] ?? "-");
+                            $nama = $s->data["Nama"] ?? ($s->data["Nama_Pemohon"] ?? ($s->data["Nama_Lengkap"] ?? "-"));
+                        @endphp
+
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         >
@@ -97,8 +102,10 @@
                             >
                                 {{ $no++ }}
                             </th>
-                            <td class="px-6 py-4">{{ $s->data }}</td>
-                            {{-- <td class="px-6 py-4">{{ $s->nama }}</td> --}}
+                            <td class="px-6 py-4">
+                                {{ $nik }}
+                            </td>
+                            <td class="px-6 py-4">{{ $nama }}</td>
                             <td class="px-6 py-4">{{ $s->jenis_surat }}</td>
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($s->created_at)->format("d-m-Y") }}
@@ -115,7 +122,7 @@
                                 }
                             @endphp
 
-                            {{-- <td class="px-6 py-4">{{ $s->note }}</td> --}}
+                            <td class="px-6 py-4">{{ $s->note ?? "-" }}</td>
                             <td class="px-6 py-4">
                                 <span class="{{ $bgColor }}">
                                     {{ $status }}
@@ -130,7 +137,11 @@
                                         Unduh File
                                     </a>
                                 @else
-                                    <!-- Biarkan kolom kosong jika tidak ada file -->
+                                    <span
+                                        class="inline-flex items-center bg-red-300 text-white font-bold py-1 px-2 rounded"
+                                    >
+                                        File tidak tersedia
+                                    </span>
                                 @endif
                             </td>
                         </tr>

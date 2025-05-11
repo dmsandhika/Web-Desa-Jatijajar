@@ -26,7 +26,7 @@ class SuratController extends Controller
     public function store(Request $request){
         $data = [];
 
-        foreach ($request->except('_token') as $key => $value) {
+        foreach ($request->except(['_token', 'jenis_surat']) as $key => $value) {
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
                 $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
@@ -46,20 +46,14 @@ class SuratController extends Controller
     }
 
     public function lacak (Request $request){
-        $query = DB::table('data_surat');
-        if ($request->filled('search')) {
-            $search = $request->input('search');
-
-            $query->where(function ($q) use ($search) {
-                $q->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(data, '$.NIK')) LIKE ?", ["%{$search}%"])
-                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(data, '$.\"NIK Pemohon\"')) LIKE ?", ["%{$search}%"]);
-            });
-
-        }
         $title = 'Pelacakan Surat';
-        $data = $query->latest()->paginate(10);
-        foreach($data as $item){
-            $item->data = json_decode($item->data);
+        $search = $request->input('search');
+        $data = [];
+        if($search){
+            $data = Surat::where('data', 'like', '%'.$search.'%')->get();
+            foreach($data as $item){
+                $item->data = json_decode($item->data, true);
+            }
         }
 
         return view('surat.lacak', compact( 'title', 'data'));
