@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\ImportDataController;
@@ -33,9 +34,7 @@ use App\Http\Controllers\Surat\PenghasilanFormController;
 use App\Http\Controllers\Surat\RekomendasiFormController;
 
 Route::get('/', [ArticleController::class, 'latestArticles']);
-Route::get('/profil', function () {
-    return view('profil', ['title'=>'Profil Desa']);
-});
+Route::get('/profil', [ProfileController::class, 'index']);
 Route::get('/kontak', function () {
     return view('contact', ['title'=>'Kontak']);
 })->name('contact');

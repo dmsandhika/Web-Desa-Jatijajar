@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot>
+    <x-slot:title>Profil Desa</x-slot>
 
 
 
@@ -34,6 +34,343 @@
     </h3>
 </div>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart Penduduk</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="max-w-4xl mx-auto p-4 mb-6 bg-white shadow rounded-lg">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4">Filter Wilayah</h3>
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+            <label for="filterRT" class="block text-sm font-medium text-gray-600 mb-1">RT</label>
+            <select id="filterRT" class="w-full rounded-lg border border-gray-300 focus:ring focus:ring-blue-200 focus:outline-none p-2">
+                <option value="">Semua RT</option>
+                @foreach($rts as $rt)
+                    <option value="{{ $rt }}">{{ $rt }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex-1">
+            <label for="filterRW" class="block text-sm font-medium text-gray-600 mb-1">RW</label>
+            <select id="filterRW" class="w-full rounded-lg border border-gray-300 focus:ring focus:ring-blue-200 focus:outline-none p-2">
+                <option value="">Semua RW</option>
+                @foreach($rws as $rw)
+                    <option value="{{ $rw }}">{{ $rw }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="max-w-7xl mx-auto space-y-6 px-4">
+    {{-- Baris 1 --}}
+    <div class="flex flex-col md:flex-row gap-4">
+        <div class="md:w-1/3 w-full">
+            <div class="bg-white shadow rounded-lg p-4 h-full">
+                <h4 class="text-xl font-semibold text-gray-700 mb-2">Jumlah Penduduk</h4>
+                <div class="aspect-[4/3] md:aspect-[5/3]">
+                    <canvas id="pendudukChart" class="w-full h-full"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:w-2/3 w-full">
+            <div class="bg-white shadow rounded-lg p-4 h-full">
+                <h4 class="text-xl font-semibold text-gray-700 mb-2">Tingkat Pendidikan</h4>
+                <div class="aspect-[3/3] md:aspect-[5/3]">
+                    <canvas id="pendidikanChart" class="w-full h-full"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Baris 2 --}}
+    <div class="flex flex-col md:flex-row gap-4">
+        <div class="md:w-2/3 w-full">
+            <div class="bg-white shadow rounded-lg p-4 h-full">
+                <h4 class="text-xl font-semibold text-gray-700 mb-2">Distribusi Usia</h4>
+                <div class="aspect-[4/3] md:aspect-[5/3]">
+                    <canvas id="usiaChart" class="w-full h-full"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:w-1/3 w-full">
+            <div class="bg-white shadow rounded-lg p-4 h-full">
+                <h4 class="text-xl font-semibold text-gray-700 mb-2">Distribusi Agama</h4>
+               <div class="aspect-[4/3] md:aspect-[5/3]">
+                    <canvas id="agamaChart" class="w-full h-full"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Presentase Gambar --}}
+    <div class="bg-white shadow rounded-lg p-6 text-center space-y-2">
+        <div id="persentaseGambar" class="text-4xl flex flex-wrap justify-center gap-2"></div>
+        <div id="persentaseText" class="text-xl"></div>
+    </div>
+
+    {{-- Distribusi Pekerjaan --}}
+    <div class="bg-white shadow rounded-lg p-6">
+        <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center">Distribusi Pekerjaan</h4>
+        <div class="aspect-[4/3] md:aspect-[5/3]">
+            <canvas id="pekerjaanChart" class="w-full h-full"></canvas>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>
+
+
+<script>
+    const pendudukData = @json($penduduk);
+    const agamaData = @json($agama);
+    const pendidikanData = @json($pendidikan);
+    const usiaData = @json($usia);
+
+    function sumPenduduk(rt = '', rw = '') {
+        let filtered = pendudukData;
+        if (rt) filtered = filtered.filter(d => d.rt === rt);
+        if (rw) filtered = filtered.filter(d => d.rw === rw);
+
+        const totalL = filtered.reduce((a, c) => a + parseInt(c["laki-laki"] || 0), 0);
+        const totalP = filtered.reduce((a, c) => a + parseInt(c["perempuan"] || 0), 0);
+        return [totalL, totalP];
+    }
+
+    function sumAgama(rt = '', rw = '') {
+        let filtered = agamaData;
+        if (rt) filtered = filtered.filter(d => d.rt === rt);
+        if (rw) filtered = filtered.filter(d => d.rw === rw);
+
+        const agama = ['islam', 'kristen', 'katolik', 'hindu', 'budha', 'konghucu'];
+        return agama.map(ag => 
+            filtered.reduce((a, c) => a + parseInt(c[ag] || 0), 0)
+        );
+    }
+    function sumPendidikan(rt = '', rw = '') {
+        let filtered = pendidikanData;
+        if (rt) filtered = filtered.filter(d => d.rt === rt);
+        if (rw) filtered = filtered.filter(d => d.rw === rw);
+
+        const pendidikan = {
+            'Belum Sekolah': ['belum_sekolah'],
+            'SD': ['sd', 'belum_tamat_sd'],
+            'SMP': ['smp'],
+            'SMA': ['sma'],
+            'Perguruan Tinggi': ['d1_3', 'akademi', 's1', 's2', 's3']
+        };
+        return Object.values(pendidikan).map(group =>
+            filtered.reduce((sum, item) => {
+                return sum + group.reduce((subSum, key) => subSum + parseInt(item[key] || 0), 0);
+            }, 0)
+        );
+    }
+
+    function sumUsia(rt = '', rw = '') {
+        let filtered = usiaData;
+        if (rt) filtered = filtered.filter(d => d.rt === rt);
+        if (rw) filtered = filtered.filter(d => d.rw === rw);
+
+        const usia = {
+            'Anak - anak': ['0-4', '5-9', '10-14'],
+            'Remaja': ['15-19', '20-24'],
+            'Dewasa': ['25-29', '30-34', '35-39', '40-44', '45-49', '50-54', '55-59'],
+            'Lansia': [ '60-64', '65-69', '70-74', '>=75']
+        };
+        return Object.values(usia).map(group =>
+            filtered.reduce((sum, item) => {
+                return sum + group.reduce((subSum, key) => subSum + parseInt(item[key] || 0), 0);
+            }, 0)
+        );
+    }
+
+    function hitungPersentaseUsiaProduktif() {
+        const usiaData = sumUsia(); // Ambil data usia per kelompok
+        const usiaProduktifIndex = [1, 2]; // Index untuk Remaja dan Dewasa
+
+        const totalUsiaProduktif = usiaProduktifIndex.reduce((sum, index) => sum + usiaData[index], 0);
+        const totalData = usiaData.reduce((sum, value) => sum + value, 0);
+
+        return (totalUsiaProduktif / totalData) * 100;
+    }
+    function tampilkanGambarPersentase(persentase) {
+        const jumlahGambar = 10; // 10 ikon untuk mewakili 100%
+        const jumlahGambarDitampilkan = Math.round((persentase / 100) * jumlahGambar);
+
+        const container = document.getElementById('persentaseGambar');
+        container.innerHTML = ''; // Reset tampilan sebelumnya
+
+        for (let i = 0; i < jumlahGambar; i++) {
+            const personIcon = document.createElement('span');
+            personIcon.classList.add('fas', 'fa-user'); // Font Awesome icon
+
+            // Jika urutan ikon lebih kecil dari jumlah yang ditampilkan, beri warna hijau (usia produktif)
+            if (i < jumlahGambarDitampilkan) {
+                personIcon.classList.add('text-green-500'); // Hijau untuk produktif
+            } else {
+                personIcon.classList.add('text-gray-500'); // Abu-abu untuk non-produktif
+            }
+
+            container.appendChild(personIcon);
+        }
+        const persentaseText = document.getElementById('persentaseText');
+        persentaseText.textContent = `${persentase.toFixed(2)}% warga desa Jatijajar saat ini berada dalam usia produktif.`;
+    }
+    const ctxPenduduk = document.getElementById('pendudukChart').getContext('2d');
+    const ctxAgama = document.getElementById('agamaChart').getContext('2d');
+    const ctxPendidikan = document.getElementById('pendidikanChart').getContext('2d');
+    const ctxUsia = document.getElementById('usiaChart').getContext('2d');
+    const ctx = document.getElementById('pekerjaanChart').getContext('2d');
+
+    const pendudukChart = new Chart(ctxPenduduk, {
+        type: 'doughnut',
+        data: {
+            labels: ['Laki-laki', 'Perempuan'],
+            datasets: [{
+                label: 'Jumlah Penduduk',
+                data: sumPenduduk(),
+                backgroundColor: ['#36A2EB', '#FF6384']
+            }]
+        }
+    });
+
+    const agamaChart = new Chart(ctxAgama, {
+        type: 'pie',
+        data: {
+            labels: ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
+            datasets: [{
+                data: sumAgama(),
+                backgroundColor: ['#f39c12', '#3498db', '#e74c3c', '#9b59b6', '#2ecc71', '#95a5a6']
+            }]
+        }
+    });
+
+    const pendidikanChart = new Chart(ctxPendidikan, {
+        type: 'bar',
+        data: {
+            labels: ['Tidak/Belum Sekolah', 'Belum Tamat/SD Sederajat', 'SMP/Sederajat', 'SMA/Sederajat', 'Perguruan Tinggi'],
+            datasets: [{
+                data: sumPendidikan(),
+                backgroundColor: ['#f39c12', '#3498db', '#e74c3c', '#9b59b6', '#2ecc71', '#95a5a6', '#34495e', '#16a085', '#2980b9']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(index);
+                            return label.length > 20 ? label.slice(0, 20) + '…' : label;
+                        },
+                        maxRotation: 45, // label miring
+                        minRotation: 30
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    })
+
+    const usiaChart = new Chart(ctxUsia, {
+        type: 'bar',
+        data: {
+            labels: ['Anak - anak (0 - 14 tahun)', 'Remaja (15 - 24 tahun)', 'Dewasa (25 - 64 tahun)', 'Lansia (>= 65 tahun)'],
+            datasets: [{
+                data: sumUsia(),
+                backgroundColor: [ '#95a5a6', '#34495e', '#16a085', '#2980b9']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(index);
+                            return label.length > 20 ? label.slice(0, 20) + '…' : label;
+                        },
+                        maxRotation: 45, // label miring
+                        minRotation: 30
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    })
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($finalDataPekerjaan->pluck('name')) !!},
+            datasets: [{
+                label: 'Jumlah Penduduk per Pekerjaan',
+                data: {!! json_encode($finalDataPekerjaan->pluck('total')) !!},
+                backgroundColor: ['#2ecc71', '#95a5a6', '#34495e', '#16a085', '#2980b9','#FF6384']
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    function updateCharts(rt, rw) {
+        pendudukChart.data.datasets[0].data = sumPenduduk(rt, rw);
+        pendudukChart.update();
+
+        agamaChart.data.datasets[0].data = sumAgama(rt, rw);
+        agamaChart.update();
+
+        pendidikanChart.data.datasets[0].data = sumPendidikan(rt, rw);
+        pendidikanChart.update();
+
+        usiaChart.data.datasets[0].data = sumUsia(rt, rw);
+        usiaChart.update();
+    }
+
+    document.getElementById('filterRT').addEventListener('change', function () {
+        updateCharts(this.value, document.getElementById('filterRW').value);
+    });
+
+    document.getElementById('filterRW').addEventListener('change', function () {
+        updateCharts(document.getElementById('filterRT').value, this.value);
+    });
+    const persentaseUsiaProduktif = hitungPersentaseUsiaProduktif();
+    console.log("Persentase usia produktif: " + persentaseUsiaProduktif.toFixed(2) + "%");
+    tampilkanGambarPersentase(persentaseUsiaProduktif);
+</script>
 
 
 
