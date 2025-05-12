@@ -67,7 +67,31 @@ class SuratController extends Controller
             }
         return view('admin.surat.index', compact('title', 'data'));
     }
+    public function diajukan(){
+        $data = Surat::where('status', 'diajukan')->get();
+        $title = 'Data Surat';
+        foreach($data as $item){
+                $item->data = json_decode($item->data, true);
+            }
+        return view('admin.surat.index', compact('title', 'data'));
+    }
 
+    public function ditolak(){
+        $data = Surat::where('status', 'ditolak')->get();
+        $title = 'Data Surat';
+        foreach($data as $item){
+                $item->data = json_decode($item->data, true);
+            }
+        return view('admin.surat.index', compact('title', 'data'));
+    }
+    public function selesai(){
+        $data = Surat::where('status', 'selesai')->get();
+        $title = 'Data Surat';
+        foreach($data as $item){
+                $item->data = json_decode($item->data, true);
+            }
+        return view('admin.surat.index', compact('title', 'data'));
+    }
     public function editSurat($id){
         $surat = Surat::find($id);
         $surat->data = json_decode($surat->data, true);
@@ -104,4 +128,6 @@ class SuratController extends Controller
         $surat->delete();
         return redirect('/admin/surat')->with('success', 'Surat berhasil dihapus');
     }
+
+    
 }

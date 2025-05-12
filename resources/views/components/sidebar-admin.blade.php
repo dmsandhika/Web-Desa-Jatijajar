@@ -15,6 +15,13 @@
                 <i class="mr-3 fas fa-tachometer-alt"></i>
                 Dashboard
             </x-side-link>
+            <x-side-link
+                href="/admin/data"
+                :active="request()->is('admin/data/*')"
+            >
+                <i class="mr-3 fas fa-tachometer-alt"></i>
+                Data Desa
+            </x-side-link>
             <div
                 x-data="{
                     open: {{ request()->is("admin/surat*") ? "true" : "false" }},

@@ -13,7 +13,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StrukturController;
-use App\Http\Controllers\DataSuratController;
+use App\Http\Controllers\ImportDataController;
 use App\Http\Controllers\KritikFormController;
 use App\Http\Controllers\ConfigSuratController;
 use App\Http\Controllers\Surat\KIAFormController;
@@ -70,13 +70,27 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [ChartController::class, 'barChart']);
         Route::get('/surat', [SuratController::class, 'dataSurat'])->name('admin.surat');
+        Route::get('/surat/diajukan', [SuratController::class, 'diajukan'])->name('admin.surat.diajukan');
+        Route::get('/surat/ditolak', [SuratController::class, 'ditolak'])->name('admin.surat.ditolak');
+        Route::get('/surat/selesai', [SuratController::class, 'selesai'])->name('admin.surat.selesai'); 
         Route::get('/surat/{id}', [SuratController::class, 'editSurat'])->name('admin.surat.detail');
         Route::put('/surat/{id}/proses', [SuratController::class, 'updateSurat'])->name('admin.surat.proses');
         Route::delete('/surat/{id}', [SuratController::class, 'destroySurat'])->name('admin.surat.delete');
+
+        Route::prefix('data')->group(function () {
+            Route::get('/', [ImportDataController::class, 'index'])->name('admin.data.desa');
+            Route::get('/data_agama', [ImportDataController::class, 'dataAgama']);
+            Route::post('/agama', [ImportDataController::class, 'importAgama'])->name('admin.data.desa.agama');
+            Route::get('/data_jumlah_penduduk', [ImportDataController::class, 'dataJumlahPenduduk']);
+            Route::post('/jumlah_penduduk', [ImportDataController::class, 'importJumlahPenduduk'])->name('admin.data.desa.jumlah_penduduk');
+            Route::get('/data_pendidikan', [ImportDataController::class, 'dataPendidikan']);
+            Route::post('/pendidikan', [ImportDataController::class, 'importDataPendidikan'])->name('admin.data.desa.pendidikan');
+            Route::get('/data_pekerjaan', [ImportDataController::class, 'dataPekerjaan']);
+            Route::post('/pekerjaan', [ImportDataController::class, 'importPekerjaan'])->name('admin.data.desa.pekerjaan');
+            Route::get('/data_usia', [ImportDataController::class, 'dataUsia']);
+            Route::post('/usia', [ImportDataController::class, 'importUsia'])->name('admin.data.desa.usia');
+        });
     });
-    Route::get('/admin/surat/diajukan', [DataSuratController::class, 'diajukan'])->name('admin.surat.diajukan');
-    Route::get('/admin/surat/ditolak', [DataSuratController::class, 'ditolak'])->name('admin.surat.ditolak');
-    Route::get('/admin/surat/selesai', [DataSuratController::class, 'selesai'])->name('admin.surat.selesai');
     Route::get('/admin/artikel/daftar', [ArticleController::class, 'all'])->name('admin.article');
     Route::get('/admin/feedback', [KritikFormController::class, 'index',])->name('admin.feedback');
     Route::get('/admin/artikel/daftar/diajukan', [ArticleController::class, 'diajukan'])->name('article.list.diajukan');
@@ -103,7 +117,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/artikel/{id}', [ArticleController::class, 'update'])->name('artikel.update');
     Route::delete('/admin/artikel/{id}', [ArticleController::class, 'destroy'])->name('artikel.destroy');
     Route::get('/articles/count', [ArticleController::class, 'countArticles']);
-    Route::get('/surat/count', [DatasuratController::class, 'count']);
 
     Route::prefix('admin/surat/config')->group(function () {
         Route::get('/', [ConfigSuratController::class, 'index'])->name('surat.config.index');

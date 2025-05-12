@@ -28,10 +28,10 @@
     </div>
     
 </div>
-
-
 <div>
-    
+    <h3 class="mb-4 mt-6 pt-6 text-3xl font-bold leading-none text-center tracking-tight text-gray-700 md:text-5xl lg:text-2xl ">
+        Visualisasi Data</span>
+    </h3>
 </div>
 
 
