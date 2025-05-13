@@ -22,13 +22,13 @@
         @if (@session()->has("success"))
             <div
                 role="alert"
-                class="bg-green-100 dark:bg-green-900 border-l-4 border-green-500 dark:border-green-700 text-green-900 dark:text-green-100 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:bg-green-200 dark:hover:bg-green-800 transform hover:scale-105"
+                class="flex items-center p-2 text-green-900 transition duration-300 ease-in-out transform bg-green-100 border-l-4 border-green-500 rounded-lg dark:bg-green-900 dark:border-green-700 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800 hover:scale-105"
             >
                 <svg
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     fill="none"
-                    class="h-5 w-5 flex-shrink-0 mr-2 text-green-600"
+                    class="flex-shrink-0 w-5 h-5 mr-2 text-green-600"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
@@ -45,13 +45,13 @@
         @if (@session()->has("loginError"))
             <div
                 role="alert"
-                class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-900 dark:text-red-100 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105"
+                class="flex items-center p-2 text-red-900 transition duration-300 ease-in-out transform bg-red-100 border-l-4 border-red-500 rounded-lg dark:bg-red-900 dark:border-red-700 dark:text-red-100 hover:bg-red-200 dark:hover:bg-red-800 hover:scale-105"
             >
                 <svg
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     fill="none"
-                    class="h-5 w-5 flex-shrink-0 mr-2 text-red-600"
+                    class="flex-shrink-0 w-5 h-5 mr-2 text-red-600"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
@@ -67,18 +67,15 @@
             </div>
         @endif
 
-        <div class="flex min-h-full flex-col justify-center px-6 py-10 lg:px-8">
+        <div class="flex flex-col justify-center min-h-full px-6 py-10 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <h2
-                    class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+                    class="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900"
                 >
                     Login Admin
                 </h2>
-                <div class="flex justify-center items-center">
-                    <img
-                        src="https://i.ibb.co.com/nD5b5FF/Jatijajar.png"
-                        class=""
-                    />
+                <div class="flex items-center justify-center">
+                    <img src="{{ asset("logo.jpg") }}" class="" />
                 </div>
             </div>
 

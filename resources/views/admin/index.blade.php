@@ -7,8 +7,10 @@
             href="{{ route("admin.surat.diajukan") }}"
             class="group w-full rounded-lg bg-[#673ab7] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#2196f3]"
         >
-            <p class="text-white text-2xl" id="totalSuratDiajukan"></p>
-            <p class="text-white text-sm">Surat Diajukan</p>
+            <p class="text-2xl text-white" id="totalSuratDiajukan">
+                {{ $diajukan }}
+            </p>
+            <p class="text-sm text-white">Surat Diajukan</p>
             <svg
                 class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +29,8 @@
             <div
                 class="group w-full rounded-lg bg-[rgb(41,49,79)] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_rgb(244,67,54)]"
             >
-                <p class="text-white text-2xl" id="totalSurat"></p>
-                <p class="text-white text-sm">Total Surat</p>
+                <p class="text-2xl text-white" id="totalSurat">{{ $total }}</p>
+                <p class="text-sm text-white">Total Surat</p>
                 <svg
                     class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
                     xmlns="http://www.w3.org/2000/svg"
@@ -48,8 +50,8 @@
             href="{{ route("article.list.diajukan") }}"
             class="group w-full rounded-lg bg-[#fc6602] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#fc1b02]"
         >
-            <p class="text-white text-2xl" id="submittedCount"></p>
-            <p class="text-white text-sm">Artikel Diajukan</p>
+            <p class="text-2xl text-white" id="submittedCount"></p>
+            <p class="text-sm text-white">Artikel Diajukan</p>
             <svg
                 class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,8 +70,8 @@
             href="/article"
             class="group w-full rounded-lg bg-[#ff0000] p-5 transition relative duration-300 cursor-pointer hover:translate-y-[3px] hover:shadow-[0_-8px_0px_0px_#ff7777]"
         >
-            <p class="text-white text-2xl" id="acceptedCount"></p>
-            <p class="text-white text-sm">Artikel Dipublish</p>
+            <p class="text-2xl text-white" id="acceptedCount"></p>
+            <p class="text-sm text-white">Artikel Dipublish</p>
             <svg
                 class="group-hover:opacity-100 absolute right-[10%] top-[50%] translate-y-[-50%] opacity-20 transition group-hover:scale-110 duration-300"
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +88,7 @@
         </a>
     </div>
     <div class="w-4/5 mx-auto mt-10">
-        <h1 class="text-center text-2xl font-bold mb-6">
+        <h1 class="mb-6 text-2xl font-bold text-center">
             Data Surat Masuk 7 Hari Terakhir
         </h1>
         <canvas id="barChart"></canvas>

@@ -13,26 +13,28 @@ class ChartController extends Controller
     public function barChart()
     {
         // Ambil 7 tanggal terakhir dari data surat beserta jumlahnya
-    $recentDatesData = Surat::selectRaw('DATE(created_at) as date, COUNT(*) as count')
-        ->groupBy(DB::raw('DATE(created_at)'))
-        ->orderByRaw('DATE(created_at) DESC')
-        ->limit(7)
-        ->get()
-        ->reverse() // agar urutan dari tanggal lama ke baru (untuk chart)
-        ->values();
+        $recentDatesData = Surat::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderByRaw('DATE(created_at) DESC')
+            ->limit(7)
+            ->get()
+            ->reverse() // agar urutan dari tanggal lama ke baru (untuk chart)
+            ->values();
 
-        // Pisahkan label dan data
-        $recentDates = $recentDatesData->pluck('date')->toArray();
-        $data = $recentDatesData->pluck('count')->toArray();
+            // Pisahkan label dan data
+            $recentDates = $recentDatesData->pluck('date')->toArray();
+            $data = $recentDatesData->pluck('count')->toArray();
 
-        $chartData = [
-            'labels' => $recentDates,
-            'data' => $data,
-    ];
+            $chartData = [
+                'labels' => $recentDates,
+                'data' => $data,
+        ];
+        $diajukan = Surat::where('status', 'diajukan')->count();
+        $total = Surat::count();
 
         $title = 'Dashboard';
 
-        return view('admin.index', compact('chartData', 'title'));
+        return view('admin.index', compact('chartData', 'title', 'diajukan','total'));
     }
     
     
