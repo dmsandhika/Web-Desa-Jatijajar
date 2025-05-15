@@ -43,6 +43,7 @@
                         <option value="text">Teks</option>
                         <option value="textarea">Teks Panjang</option>
                         <option value="number">Angka</option>
+                        <option value="date">Tanggal</option>
                         <option value="file">File</option>
                     </select>
                     <button

@@ -71,7 +71,7 @@
                                     {{ $key }}
                                 </label>
 
-                                <div class="mt-2 flex items-center gap-4">
+                                <div class="flex items-center gap-4 mt-2">
                                     {{-- Tombol download file jika ada --}}
                                     @php
                                         $fileKey = str_replace(" ", "_", $key);
@@ -91,6 +91,25 @@
                                             Belum ada file
                                         </span>
                                     @endif
+                                </div>
+                            </div>
+                        @elseif ($type == "date")
+                            <div class="col-span-full">
+                                <label
+                                    for="{{ $key }}"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                    {{ $key }}
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        type="date"
+                                        name="{{ $key }}"
+                                        id="{{ $key }}"
+                                        value="{{ old($key, $surat->data[str_replace(" ", "_", $key)] ?? "") }}"
+                                        autocomplete="off"
+                                        disabled
+                                    />
                                 </div>
                             </div>
                         @elseif ($type == "textarea")
@@ -140,7 +159,7 @@
                         @endif
                     @endforeach
 
-                    <div class="col-span-full pt-10 border-t-2">
+                    <div class="pt-10 border-t-2 col-span-full">
                         <label
                             for="file"
                             class="block text-sm font-medium leading-6 text-gray-900"
@@ -158,7 +177,7 @@
                             />
                         </div>
                     </div>
-                    <div class="col-span-full pt-4">
+                    <div class="pt-4 col-span-full">
                         <label
                             for="note"
                             class="block text-sm font-medium leading-6 text-gray-900"
@@ -179,11 +198,11 @@
                 </div>
             </div>
 
-            <div class="mt-6 flex items-center justify-end gap-x-6">
+            <div class="flex items-center justify-end mt-6 gap-x-6">
                 <a href="{{ route("admin.surat") }}" class="inline-block">
                     <button
                         type="button"
-                        class="text-sm font-semibold leading-6 text-gray-900 border border-transparent p-2 rounded hover:border-gray-500"
+                        class="p-2 text-sm font-semibold leading-6 text-gray-900 border border-transparent rounded hover:border-gray-500"
                     >
                         Cancel
                     </button>
@@ -192,7 +211,7 @@
                 <button
                     type="button"
                     onclick="submitForm('ditolak')"
-                    class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                    class="px-3 py-2 text-sm font-semibold text-white bg-red-600 rounded-md shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                 >
                     Tolak
                 </button>
@@ -200,7 +219,7 @@
                 <button
                     type="button"
                     onclick="submitForm('selesai')"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                     Submit
                 </button>

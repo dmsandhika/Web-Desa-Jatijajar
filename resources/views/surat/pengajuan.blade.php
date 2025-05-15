@@ -73,6 +73,23 @@
                                     />
                                 </div>
                             </div>
+                        @elseif ($type == "date")
+                            <div class="col-span-full">
+                                <label
+                                    for="{{ $key }}"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                    {{ $key }}
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        type="date"
+                                        name="{{ $key }}"
+                                        id="{{ $key }}"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                            </div>
                         @elseif ($type == "textarea")
                             <div class="col-span-full">
                                 <label

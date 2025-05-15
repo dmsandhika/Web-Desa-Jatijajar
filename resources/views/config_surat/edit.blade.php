@@ -64,6 +64,13 @@
                                 Angka
                             </option>
                             <option
+                                value="date"
+                                {{ $type == "date" ? "selected" : "" }}
+                            >
+                                Tanggal
+                            </option>
+
+                            <option
                                 value="file"
                                 {{ $type == "file" ? "selected" : "" }}
                             >
